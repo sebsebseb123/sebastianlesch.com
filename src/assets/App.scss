@@ -1,0 +1,73 @@
+@import 'vars';
+@import 'animations';
+@import 'typography';
+
+body {
+  // background-color: $background-color;
+  color: $text-color;
+  padding: 0;
+  margin: 0;
+  position: relative;
+  @include bg-glow-animation;
+}
+
+a {
+  color: $text-color;
+  text-decoration: none;
+}
+
+h1,
+.h1 {
+  text-align: center;
+  font-size: 2rem;
+}
+
+code {
+  background-color: grey;
+}
+
+header {
+  @include box-glow-animation;
+  display: flex;
+  background-color: black;
+  border-bottom: 1px solid white;
+  box-shadow: 0 0 10px white;
+  padding: 1rem;
+  position: relative;
+
+  // &>* {
+  //   border: 1px solid red;
+  // }
+
+  & .site-title {
+    flex-grow: 1;
+    font-weight: bold;
+  }
+}
+
+footer {
+  text-align: center;
+}
+
+nav ol {
+  list-style: none;
+  padding: 0;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem
+}
+
+.main.container {
+  width: 960px;
+  margin: 0 auto;
+}
+
+.callout {
+  @include box-callout-glow-animation;
+  border-radius: 1rem;
+  background-color: #444;
+  padding: 1rem;
+  margin: 2rem auto;
+  text-align: center;
+}
