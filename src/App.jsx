@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import './assets/App.scss'
 
 function App() {
