@@ -1,0 +1,111 @@
+@import 'media';
+
+// Local define vars.
+$font-size: 4rem;
+
+nav {
+  perspective: 1300px;
+  perspective-origin: 50% -50%;
+
+  svg {
+    cursor: pointer;
+    text-transform: uppercase;
+    font-size: $font-size;
+    margin: -0.25rem auto;
+    transform: rotateY(-30deg) scale(1) translateX(-20rem);
+    transition: all 0.25s ease-in-out;
+
+    &:hover {
+      transform: rotateY(-25deg) scale(1.3) translateX(-20rem);
+    }
+
+    &.active:hover {
+      transform: rotateY(-25deg) scale(1.3) translateX(-20rem);
+    }
+
+    &.active {
+      transform: rotateY(-27deg) scale(1.25) translateX(-20rem);
+    }
+
+    @include media-small {
+      font-size: 5rem;
+      margin: 1.5rem auto;
+      transform: rotateY(-30deg) scale(2) translateX(-10rem);
+
+      &:hover {
+        transform: rotateY(-25deg) scale(2.3) translateX(-10rem);
+      }
+
+      &.active:hover {
+        transform: rotateY(-25deg) scale(2.3) translateX(-10rem);
+      }
+
+      &.active {
+        transform: rotateY(-27deg) scale(2.25) translateX(-10rem);
+      }
+    }
+
+  }
+
+}
+
+$colors: #00ff9f, #00b8ff, #001eff, #bd00ff, #d600ff;
+// $colors: #F2385A, #F5A503, #E9F1DF, #56D9CD, #3AA1BF;
+// $colors: #6ECBF5, #C252E1, #9777fd, #586AE2, #c23e7d;
+$num-links: 3;
+$max: length($colors);
+$dash: 40;
+$dash-gap: 100;
+$dash-space: $dash * ($max - 1) + $dash-gap * $max;
+$time: 8s;
+$time-step: $time/$max;
+
+@for $item from 1 through $num-links {
+  nav svg:nth-child(#{$num-links}n + #{$item}) {
+    height: $font-size;
+    width: $font-size * 6;
+
+    & .text {
+      fill-opacity: 0;
+      stroke-linejoin: round;
+      stroke-dasharray: $dash $dash-space;
+      stroke-dashoffset: 0;
+      animation: stroke-it $time infinite linear;
+      transition: stroke-dasharray 1s, fill-opacity 2s, stroke-width 2s;
+
+      @for $item from 1 through $max {
+        &:nth-child(#{$max}n + #{$item}) {
+          $color: nth($colors, $item);
+          stroke-width: random(3) + 2;
+          stroke: $color;
+          fill: $color;
+          animation-delay: -($time-step * $item);
+        }
+      }
+    }
+
+    &:hover .text {
+      fill-opacity: 0.25;
+      stroke-dasharray: 20 80;
+      stroke-width: 5;
+    }
+
+    &.active:hover .text {
+      fill-opacity: 0.25;
+      stroke-dasharray: 20 80;
+      stroke-width: 5;
+    }
+
+    &.active .text {
+      fill-opacity: 0.1;
+      stroke-dasharray: 10 40;
+      // stroke-width: 8;
+    }
+  }
+}
+
+@keyframes stroke-it {
+  100% {
+    stroke-dashoffset: -($dash + $dash-gap) * $max;
+  }
+}

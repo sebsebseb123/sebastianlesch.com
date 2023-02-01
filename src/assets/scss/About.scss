@@ -1,0 +1,174 @@
+svg.skill-card {
+  width: 12rem;
+  height: 12rem;
+  display: inline-block;
+  font-size: 5rem;
+  box-sizing: border-box;
+
+  &.css {
+    // border: 1px solid red;
+    border-left: 1px solid #00bdff;
+    border-right: 1px solid #00bdff;
+    box-shadow: 0 0 10px #00bdff;
+
+    // box-shadow: 0 0 5px orange;
+    & .card-title {
+      stroke: white;
+      stroke-width: 2;
+      fill: white;
+      text-shadow: 0 3px 0 rgb(15, 167, 255), 0 5px 0 rgb(0, 0, 0), 0 0 10px rgb(0, 0, 0);
+    }
+
+    & line {
+      stroke: #00bdff;
+      // stroke-width: 3;
+      filter: drop-shadow(0 0 10px #000);
+
+      // text-shadow: 0 0 5px orange;
+      &.accent-line {
+        stroke: rgb(18, 116, 177);
+        stroke-width: 5;
+        stroke-linecap: butt;
+        filter: drop-shadow(0 0 10px #00bdff) drop-shadow(0 0 1px rgb(70, 24, 218));
+      }
+    }
+  }
+
+
+  &.js {
+    border: 1px solid black;
+    box-shadow: 0 0 5px white;
+
+    & .card-title {
+      // stroke: #00fffa;
+      stroke-width: 2;
+      fill: white;
+      // text-shadow: 0 3px 0 rgb(15, 167, 255), 0 5px 0 rgb(26, 115, 167), 0 0 10px rgb(15, 167, 255);
+    }
+
+    & line {
+      stroke: black;
+      // stroke-width: 3;
+      filter: drop-shadow(0 0 10px white);
+
+      // text-shadow: 0 0 5px orange;
+    }
+
+    & .accent-line {
+      fill: black;
+      stroke: white;
+      stroke-width: 5;
+      stroke-linecap: butt;
+      // filter: drop-shadow(0 0 10px rgb(255, 169, 104)) drop-shadow(0 0 1px rgb(70, 24, 218));
+    }
+  }
+
+  &.php {
+    border: 1px solid black;
+    // box-shadow: 0 0 5px white;
+    animation: rainbow-glow 2s infinite linear;
+
+    & .card-title {
+      stroke: black;
+      stroke-width: 2;
+      font-size: 5rem;
+      fill: white;
+      // @include rainbow-text;
+      text-shadow:
+        0 -2px 0 rgb(15, 167, 255),
+        0 2px 0 rgb(15, 167, 255),
+        -3px 0 0 rgb(26, 115, 167),
+        3px 0 0 rgb(26, 115, 167),
+        0 0 5px rgb(15, 255, 71),
+        0 0 10px rgb(15, 255, 227),
+        0 0 15px rgb(15, 83, 255),
+        0 0 20px white;
+    }
+
+    & line {
+      stroke: black;
+      // stroke-width: 3;
+      filter: drop-shadow(0 0 10px white);
+
+      // text-shadow: 0 0 5px orange;
+    }
+
+    & .accent-box {
+      fill: black;
+      stroke: white;
+      stroke-width: 5;
+      stroke-linecap: butt;
+
+      // filter: drop-shadow(0 0 10px rgb(255, 169, 104)) drop-shadow(0 0 1px rgb(70, 24, 218));
+      &.box-1 {
+        fill: blue;
+        stroke: red;
+      }
+
+      &.box-2 {
+        fill: green;
+        stroke: yellow;
+        // filter: drop-shadow(0 0 2px white);
+      }
+
+      &.box-3 {
+        fill: rgb(0, 145, 255);
+        stroke: purple;
+      }
+    }
+  }
+
+  &.aws {
+    // border: 1px solid orange;
+    background-color: black;
+    box-shadow: 0 0 10px rgba(255, 162, 0, 0.5), 0 0 5px rgb(255, 211, 134), 0 0 5px rgb(255, 211, 134);
+
+    & .card-title {
+      stroke: rgb(155, 101, 0);
+      stroke-width: 2;
+      fill: rgb(255, 251, 170);
+      font-size: 4rem;
+      // text-shadow: 0 3px 0 rgb(15, 167, 255), 0 5px 0 rgb(26, 115, 167), 0 0 10px rgb(15, 167, 255);
+    }
+
+    & ellipse {
+      stroke: rgb(255, 251, 170);
+      fill: none;
+      stroke-width: 3;
+      filter: drop-shadow(0 0 10px yellow);
+
+      // text-shadow: 0 0 5px orange;
+    }
+
+    & .accent-ellipse {
+      fill: none;
+      stroke: rgb(255, 251, 170);
+      // stroke: rgb(255, 128, 0);
+      stroke-width: 5;
+      stroke-linecap: butt;
+      // filter: drop-shadow(0 0 10px rgb(255, 169, 104)) drop-shadow(0 0 1px rgb(70, 24, 218));
+    }
+  }
+}
+
+@keyframes rainbow-glow {
+  0% {
+    box-shadow: 0 0 5px #F00, 0 0 5px #F00, 0 0 5px #F00, 0 0 5px #F00;
+  }
+
+  33% {
+    box-shadow: 0 0 5px #0F0, 0 0 5px #0F0, 0 0 5px #0F0, 0 0 5px #0F0;
+  }
+
+  66% {
+    box-shadow: 0 0 5px #00F, 0 0 5px #00F, 0 0 5px #00F, 0 0 5px #00F;
+  }
+
+  100% {
+    box-shadow: 0 0 5px #F00, 0 0 5px #F00, 0 0 5px #F00, 0 0 5px #F00;
+  }
+}
+
+@mixin rainbow-text {
+  text-shadow: 5px 5px 0 blue;
+}

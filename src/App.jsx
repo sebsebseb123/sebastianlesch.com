@@ -1,39 +1,49 @@
-import './assets/App.scss'
+import { useState } from 'react'
+import About from './components/About'
+import Projects from './components/Projects'
+import Contact from './components/Contact'
+import Nav from './components/Nav'
+import './assets/scss/App.scss'
+
 
 function App() {
+  const [page, setPage] = useState('about');
+
+  const onClickInit = () => {
+    document.getElementById('main').classList.remove('init');
+    document.getElementById('start').classList.add('bye');
+  }
+
+  const onClickNav = e => {
+    setPage(e.target.getAttribute('value'));
+  }
+
+  const getPage = page => {
+    switch (page) {
+      case 'about':
+        return <About />
+      case 'projects':
+        return <Projects />
+      case 'contact':
+        return <Contact />
+    }
+  }
+
   return (
     <>
-      <header>
-        <div className="site-title">Sebastian Lesch</div>
-        <nav>
-          <ol>
-            <li><a href="about">About</a></li>
-            <li><a href="projects">Projects</a></li>
-            <li><a href="blog">Blog</a></li>
-          </ol>
-        </nav>
-      </header>
-      <div className="main container">
-        <div className="callout">
-          <h1>
-            <span className="t-code">Coder</span>&nbsp;
-            <span className="t-biz">, Entrepreneur ,</span>&nbsp;
-            <span className="t-music">Musician</span>
-          </h1>
-          <p>
-            <span className="t-code">I code websites, manage dev ops, build google apps plugins, write scripts and other tools.</span>
-            <br />
-            <span className="t-biz">I built and help manage a brewery, a restaurant, and a film production company.</span>
-            <br />
-            <span className="t-music">I have a passion for music and film that drives me to create.</span></p>
-        </div>
-        <div className="callout">
-          <div className='h1'>Hi, I'm Sebastian.</div><p>I'm based in Toronto and I'm always looking for interesting projects to be a part of.</p>
+      <div id='start'>
+        <div className='container'>
+          <span className='anchor' onClick={onClickInit}>Click here</span>
+          &nbsp;to find out more about Sebastian Lesch.
         </div>
       </div>
-      <footer>
-        &copy; Sebastian Lesch | <a href="mailto:sebastian.lesch@gmail.com">sebastian.lesch@gmail.com</a>
-      </footer>
+      <div id="main" className='container init'>
+        <div className={"display-area " + page}>
+          {getPage(page)}
+          {/* <About /> */}
+        </div>
+        <Nav onClickNav={onClickNav} page={page} />
+      </div>
     </>
   )
 }
