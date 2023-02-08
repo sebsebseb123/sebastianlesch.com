@@ -1,0 +1,474 @@
+@import 'animations';
+
+$num-store-elements: 12;
+$num-streetlight-elements: 12;
+$avg-store-width: 400px;
+$num-skyline-images: 8;
+$num-sign-images: 24;
+$num-floor-images: 3;
+$num-nightsky-images: 3;
+$pages: (
+  'about',
+  'projects',
+  'contact'
+);
+
+$sign-bg-colors: (
+  #000,
+  #FFF,
+  #FFF0
+);
+
+@mixin special-sign {
+  background-color: #0000;
+  border-radius: 2px;
+  border: 0px solid;
+  background-size: 100%;
+  width: 75px;
+  height: 75px;
+  animation: sign-pulse 1s infinite linear;
+  filter: contrast(1) saturate(1) brightness(0.8) grayscale(10%) drop-shadow(0 0 4px #FFF9) hue-rotate(0deg);
+
+  &:hover {
+    filter: contrast(1.25) saturate(1.25) brightness(1) grayscale(0%) drop-shadow(0 0 6px #FFFF) hue-rotate(0deg);
+  }
+}
+
+@keyframes sign-pulse {
+  0% {
+    filter: contrast(1) saturate(1) brightness(0.8) grayscale(10%) drop-shadow(0 0 4px #FFF9) hue-rotate(0deg);
+  }
+
+  50% {
+    filter: contrast(1.25) saturate(1.25) brightness(1) grayscale(0%) drop-shadow(0 0 6px #FFFF) hue-rotate(0deg);
+  }
+
+  100% {
+    filter: contrast(1) saturate(1) brightness(0.8) grayscale(10%) drop-shadow(0 0 4px #FFF9) hue-rotate(0deg);
+  }
+
+}
+
+.background {
+  transition: background-color 2s 1s;
+  height: 100%;
+  width: 100%;
+
+  @each $page in $pages {
+    &.#{$page} .alleyway {
+      animation: redshift-#{$page} 2.5s 1 cubic-bezier(0.680, -0.550, 0.265, 1.550);
+    }
+
+    @keyframes redshift-#{$page} {
+      0% {
+        perspective: $avg-store-width * $num-store-elements / 2;
+      }
+
+      80% {
+        perspective: $avg-store-width / 2;
+      }
+
+      100% {
+        perspective: $avg-store-width * $num-store-elements / 2;
+      }
+    }
+  }
+}
+
+.copy {
+  position: absolute;
+  background-color: #0009;
+  padding: 1rem;
+  bottom: 0;
+  transform: translateZ(1200px);
+  width: 50%;
+  opacity: 0;
+  transition: opacity 2s 1s;
+  border-radius: 4px;
+
+  &.about-copy {
+    right: 0;
+  }
+
+  &.projects-copy {
+    left: 0;
+  }
+
+  &.contact-copy {
+    text-align: center;
+    left: 20%;
+    width: 60%;
+    bottom: 40%;
+    height: auto;
+    box-shadow: 0 0 10px rgb(170, 238, 255);
+
+    & a {
+      text-shadow: 0 0 5px rgb(170, 238, 255);
+      color: #ffffff;
+      text-decoration: none;
+    }
+  }
+}
+
+.about .about-copy {
+  opacity: 1;
+}
+
+.projects .projects-copy {
+  opacity: 1;
+}
+
+.contact .contact-copy {
+  opacity: 1;
+}
+
+@each $page in $pages {
+
+  .#{$page} {
+    &.background {
+      background-color: rgb(random(100)+20, random(50), random(100)+20);
+    }
+
+    .nightsky {
+      transition: background-image 2s 1s;
+      background-image: url("./../img/nightsky#{random($num-nightsky-images)}.jpg");
+      background-size: cover;
+      height: 100%;
+      width: 100%;
+      image-rendering: auto;
+      position: absolute;
+      opacity: 0.9;
+    }
+
+    .alleyway {
+      position: absolute;
+      top: percentage((random(20) + 40)/100);
+
+      // top: 50%;
+      // left: 50%;
+      @if $page =='about' {
+        left: 30%;
+        perspective-origin: 30% 60%;
+      }
+
+      @else if $page =='projects' {
+        left: 70%;
+        perspective-origin: 70% 60%;
+      }
+
+      @else if $page =='contact' {
+        left: 50%;
+        perspective-origin: 50% 40%;
+      }
+
+      // left: percentage((random(10) + 25)/100);
+      // left: 30%;
+      margin-left: $avg-store-width / -2;
+      margin-top: $avg-store-width / -2;
+      transform-style: preserve-3d;
+      width: $avg-store-width;
+      height: $avg-store-width;
+      // perspective: 300px;
+      perspective: $avg-store-width * $num-store-elements / 2;
+      // perspective-origin: 50% 50%;
+      // perspective-origin: 30% 60%;
+      transition: top 2s 1s,
+      left 2s 1s;
+      // image-rendering: pixelated;
+
+      // background-color: #F003;
+
+      & .wall {
+        display: flex;
+        align-items: stretch;
+        width: $avg-store-width * $num-store-elements;
+        height: $avg-store-width;
+        position: absolute;
+
+        // opacity: 0.75;
+        &.right {
+          transform: rotateY(270deg) translateZ(($avg-store-width * $num-store-elements / 2) - $avg-store-width);
+        }
+
+        &.left {
+          transform: rotateY(90deg) translateZ($avg-store-width * $num-store-elements / -2);
+        }
+
+        & .store {
+          background-repeat: no-repeat;
+          background-position: bottom;
+          box-sizing: border-box;
+          transition: filter 0.5s;
+          margin: 0 -1px;
+        }
+
+        &.right {
+          @include store-list;
+        }
+
+        &.left {
+          @include store-list;
+        }
+
+
+        &.bottom {
+          transform: rotateX(90deg) translateZ(($avg-store-width * $num-store-elements / 2) - $avg-store-width);
+          background-color: yellow;
+          background-image: url("./../img/floor#{random($num-floor-images)}.jpg");
+          background-size: 20% 5%;
+          height: $avg-store-width * $num-store-elements;
+          width: $avg-store-width;
+          transition: background-image 2s 1s;
+          // filter: hue-rotate((random(20) * -1) + deg) saturate(2) contrast(2) brightness(0.25) grayscale(60%);
+
+          & .light {
+            position: absolute;
+            filter: blur(50px) brightness(5);
+            transition: all 2s 1s;
+          }
+
+          @for $i from 1 through $num-streetlight-elements {
+            $start-top: percentage(random(100) / 100) - 10%;
+            $start-left: percentage(random(100) / 100) - 10%;
+            $height: random(300)+50px;
+
+            & .light#{$i} {
+              background: rgb(random(255), random(255), random(255));
+              height: $height;
+              width: random(50) + 50px;
+              position: absolute;
+              top: $start-top;
+              left: $start-left;
+              filter: blur($height / 2) brightness(2) grayscale(40%);
+              animation: streetlight-#{$i} (random(60) + 10)+s infinite ease-in-out;
+            }
+
+            @keyframes streetlight-#{$i} {
+              0% {
+                top: $start-top;
+                left: $start-left;
+              }
+
+              50% {
+                top: percentage(random(100) / 100);
+                left: percentage(random(100) / 100);
+              }
+
+              100% {
+                top: $start-top;
+                left: $start-left;
+              }
+            }
+          }
+        }
+
+        &.back {
+          filter: saturate(1.5) brightness(0.9) contrast(1.5) grayscale(40%) drop-shadow(0 0 100px #FAA6);
+          transform: translateX($avg-store-width * $num-store-elements / -2) translateY($avg-store-width * -1) translateZ($avg-store-width * $num-store-elements / -2);
+          background-image: url("./../img/skyline#{random($num-skyline-images)}.png");
+          background-repeat: no-repeat;
+          background-position: bottom;
+          background-size: 70% 80%;
+          width: $avg-store-width * $num-store-elements;
+          height: $avg-store-width * 2;
+          image-rendering: auto;
+          transition: background-image 2s 1s;
+          // display: none;
+          // background-color: red;
+        }
+      }
+
+      & .sign {
+        position: absolute;
+        bottom: 0px;
+        height: $avg-store-width / 8;
+        width: $avg-store-width / 8;
+        transition: bottom 2s 1s, background-image 2s 1s, height 2s 1s, width 2s 1s, transform 2s 1s, filter 0.5s, background-size 2s 1s, background-color 2s 1s;
+        background-size: 100%;
+        background-repeat: no-repeat;
+        background-position: center;
+        image-rendering: pixelated;
+
+        &.left {
+          left: 0px;
+        }
+
+        &.right {
+          right: 0px;
+        }
+
+        @for $i from 1 through $num-store-elements {
+
+          @each $direction in left,
+          right {
+            $height: random($avg-store-width/10)+($avg-store-width / 10);
+            $brightness: random(100)/100;
+            $hue: random(360);
+
+            &.#{$direction}.sign#{$i} {
+              bottom: random($avg-store-width - $height - 200px) + 100px;
+              height: $height;
+              width: random($avg-store-width/10)+($avg-store-width / 10);
+              transform: translateZ(($i * $avg-store-width) - ($avg-store-width * $num-store-elements / 2) - ($avg-store-width / 2));
+              // background-color: rgb(random(255), random(255), random(255));
+              // background-image: url("./../img/sign#{random($num-sign-images)}.png");
+              border-radius: random(15)+px;
+              border: random(3)-1px solid;
+              border-color: nth($sign-bg-colors, random(length($sign-bg-colors)));
+              background-size: percentage((random(100) / 100) + 0.5);
+              background-color: nth($sign-bg-colors, random(length($sign-bg-colors)));
+              background-image: url("./../img/sign#{random($num-sign-images)}.png");
+              filter: saturate(0.75) brightness($brightness) grayscale(70%) drop-shadow(0 0 5px rgba(random(200)+100, random(150)+100, random(150)+100, $brightness)) hue-rotate($hue + deg);
+
+              &:hover {
+                filter: saturate(1.5) brightness($brightness+0.5) grayscale(20%) drop-shadow(0 0 7px rgba(random(200)+100, random(150)+100, random(150)+100, $brightness+0.5)) hue-rotate($hue + deg);
+              }
+
+              @if $page =='projects' and $direction =='left' and $i ==12 {
+                display: none;
+              }
+
+              @else if $page =='projects' and $direction =='left' and $i ==11 {
+                @include special-sign;
+                bottom: 150px;
+                background-image: url("./../img/longslice.gif");
+                transform: translateZ(1700px);
+                background-color: #000B;
+                background-size: 80%;
+                height: 40px;
+
+                &:hover {
+                  cursor: pointer;
+                }
+              }
+
+              @else if $page =='projects' and $direction =='left' and $i ==10 {
+                @include special-sign;
+                bottom: 220px;
+                background-image: url("./../img/aviary.svg");
+                // transform: translateZ(2000px);
+                background-color: #101820BB;
+                background-size: 80%;
+                height: 80px;
+                width: 80px;
+
+                &:hover {
+                  cursor: pointer;
+                }
+              }
+
+              @else if $page =='projects' and $direction =='left' and $i ==9 {
+                @include special-sign;
+                bottom: 140px;
+                background-image: url("./../img/ors.svg");
+                // transform: translateZ(2000px);
+                // background-color: #101820;
+                background-color: #86005eBB;
+                background-size: 80%;
+                border-radius: 10px;
+                height: 100px;
+                width: 70px;
+
+                &:hover {
+                  cursor: pointer;
+                }
+              }
+
+              @else if $page =='projects' and $direction =='left' and $i ==8 {
+                @include special-sign;
+                bottom: 240px;
+                background-image: url("./../img/pbs.png");
+                transform: translateZ(500px);
+                background-size: 100%;
+                height: 80px;
+                width: 80px;
+
+                &:hover {
+                  cursor: pointer;
+                }
+              }
+
+              @else if $page =='about' and $direction =='right' and $i ==11 {
+                @include special-sign;
+                bottom: 200px;
+                background-image: url("./../img/react.svg");
+                transform: translateZ(1700px);
+
+                &::before {
+                  content: 'React';
+                  font-size: 1em;
+                  color: black;
+                  position: static;
+                  // top: 0;
+                  left: 0;
+                  right: 0;
+                  bottom: 10px;
+                  display: flex;
+                  justify-content: center;
+                  align-items: flex-end;
+                  height: 100%;
+                  line-height: 2rem;
+                }
+              }
+
+              @else if $page =='about' and $direction =='right' and $i ==10 {
+                @include special-sign;
+                bottom: 180px;
+                background-image: url("./../img/javascript.svg");
+              }
+
+              @else if $page =='about' and $direction =='right' and $i ==9 {
+                @include special-sign;
+                bottom: 240px;
+                background-size: 90%;
+                height: 100px;
+                background-image: url("./../img/css.svg");
+              }
+
+              @else if $page =='about' and $direction =='right' and $i ==8 {
+                @include special-sign;
+                bottom: 160px;
+                background-size: 90%;
+                height: 100px;
+                background-image: url("./../img/drupal.svg");
+
+                &::before {
+                  content: 'Drupal';
+                  font-size: 1em;
+                  color: black;
+                  position: static;
+                  top: 10px;
+                  left: 0;
+                  right: 0;
+                  // bottom: 10px;
+                  display: flex;
+                  justify-content: center;
+                  align-items: flex-end;
+                  // height: 100%;
+                  line-height: 2rem;
+                }
+              }
+
+              @else if $page =='about' and $direction =='right' and $i ==7 {
+                @include special-sign;
+                bottom: 250px;
+                background-size: 90%;
+                background-image: url("./../img/php.svg");
+              }
+
+              @else if $page =='about' and $direction =='right' and $i ==6 {
+                @include special-sign;
+                bottom: 160px;
+                background-size: 90%;
+                height: 60px;
+                background-image: url("./../img/aws.svg");
+                background-size: 70%;
+                background-color: white;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,48 +1,44 @@
-import { useState } from 'react'
-import About from './components/About'
-import Projects from './components/Projects'
-import Contact from './components/Contact'
+import { useEffect, useState } from 'react'
 import Nav from './components/Nav'
+import BGBuildings from './components/BGBuildings'
 import './assets/scss/App.scss'
 
 
 function App() {
   const [page, setPage] = useState('about');
 
-  const onClickInit = () => {
-    document.getElementById('main').classList.remove('init');
-    document.getElementById('start').classList.add('bye');
-  }
-
   const onClickNav = e => {
     setPage(e.target.getAttribute('value'));
   }
 
-  const getPage = page => {
-    switch (page) {
-      case 'about':
-        return <About />
-      case 'projects':
-        return <Projects />
-      case 'contact':
-        return <Contact />
+  // Create a useEffect to add an event listener to the window object for mouse move.
+  // The event listener should call a function that updates css property "perspective-origin" of the .alleyway class.
+  // The function should take the mouse position and use it to calculate the perspective-origin value.
+  useEffect(() => {
+    const handleMouseMove = e => {
+      const alleyway = document.querySelector('.alleyway');
+      const x = e.clientX;
+      const y = e.clientY;
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      const xPercent = ((x / width) * 60) + 20;
+      const yPercent = ((y / height) * 40) + 40;
+      alleyway.style.setProperty('perspective-origin', xPercent + '% ' + yPercent + '%');
     }
-  }
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+    }
+  }, []);
+
 
   return (
     <>
-      <div id='start'>
-        <div className='container'>
-          <span className='anchor' onClick={onClickInit}>Click here</span>
-          &nbsp;to find out more about Sebastian Lesch.
+      <div id="main" className='container'>
+        <div className={"background " + page}>
+          <BGBuildings page={page} />
+          <Nav onClickNav={onClickNav} page={page} />
         </div>
-      </div>
-      <div id="main" className='container init'>
-        <div className={"display-area " + page}>
-          {getPage(page)}
-          {/* <About /> */}
-        </div>
-        <Nav onClickNav={onClickNav} page={page} />
       </div>
     </>
   )

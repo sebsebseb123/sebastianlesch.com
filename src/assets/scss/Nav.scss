@@ -1,11 +1,27 @@
 @import 'media';
 
-// Local define vars.
 $font-size: 4rem;
 
+#main .projects nav {
+  right: 55rem;
+
+  & svg {
+    right: 10rem;
+
+    &.about {
+      right: 18rem;
+    }
+
+    &.contact {
+      right: 17rem;
+    }
+  }
+}
+
 nav {
-  perspective: 1300px;
-  perspective-origin: 50% -50%;
+  perspective: 3000px;
+  perspective-origin: 50% 40%;
+  transition: right 3s;
 
   svg {
     cursor: pointer;
@@ -13,7 +29,25 @@ nav {
     font-size: $font-size;
     margin: -0.25rem auto;
     transform: rotateY(-30deg) scale(1) translateX(-20rem);
-    transition: all 0.25s ease-in-out;
+    transition: transform 0.25s ease-in-out, right 3s;
+    display: inline-block;
+    position: absolute;
+    right: -10rem;
+
+    &.about {
+      width: 13rem;
+      bottom: 15rem;
+    }
+
+    &.projects {
+      width: 16rem;
+      bottom: 8rem;
+    }
+
+    &.contact {
+      width: 14rem;
+      bottom: 0rem;
+    }
 
     &:hover {
       transform: rotateY(-25deg) scale(1.3) translateX(-20rem);
@@ -62,16 +96,16 @@ $time-step: $time/$max;
 
 @for $item from 1 through $num-links {
   nav svg:nth-child(#{$num-links}n + #{$item}) {
-    height: $font-size;
-    width: $font-size * 6;
 
     & .text {
+      border: 1px solid green;
       fill-opacity: 0;
       stroke-linejoin: round;
       stroke-dasharray: $dash $dash-space;
       stroke-dashoffset: 0;
       animation: stroke-it $time infinite linear;
       transition: stroke-dasharray 1s, fill-opacity 2s, stroke-width 2s;
+      text-shadow: 0 0 10px rgb(98, 98, 255);
 
       @for $item from 1 through $max {
         &:nth-child(#{$max}n + #{$item}) {
