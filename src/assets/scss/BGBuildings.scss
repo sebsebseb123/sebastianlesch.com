@@ -27,25 +27,25 @@ $sign-bg-colors: (
   background-size: 100%;
   width: 75px;
   height: 75px;
-  animation: sign-pulse 1s infinite linear;
-  filter: contrast(1) saturate(1) brightness(0.8) grayscale(10%) drop-shadow(0 0 0px #FFF9) hue-rotate(0deg);
+  // animation: sign-pulse 1s infinite linear;
+  filter: contrast(1.2) saturate(1.2) brightness(1.2) grayscale(0%) hue-rotate(0deg);
 
   // &:hover {
-  //   filter: contrast(1.25) saturate(1.25) brightness(1) grayscale(0%) drop-shadow(0 0 1px #FFFF) hue-rotate(0deg);
+  //   filter: contrast(1.25) saturate(1.25) brightness(1) grayscale(0%) hue-rotate(0deg);
   // }
 }
 
 @keyframes sign-pulse {
   0% {
-    filter: contrast(1) saturate(1) brightness(0.8) grayscale(10%) drop-shadow(0 0 0px #FFF9) hue-rotate(0deg);
+    filter: contrast(1) saturate(1) brightness(0.8) grayscale(10%) hue-rotate(0deg);
   }
 
   50% {
-    filter: contrast(1.25) saturate(1.25) brightness(1) grayscale(0%) drop-shadow(0 0 1px #FFFF) hue-rotate(0deg);
+    filter: contrast(1.25) saturate(1.25) brightness(1) grayscale(0%) hue-rotate(0deg);
   }
 
   100% {
-    filter: contrast(1) saturate(1) brightness(0.8) grayscale(10%) drop-shadow(0 0 0px #FFF9) hue-rotate(0deg);
+    filter: contrast(1) saturate(1) brightness(0.8) grayscale(10%) hue-rotate(0deg);
   }
 
 }

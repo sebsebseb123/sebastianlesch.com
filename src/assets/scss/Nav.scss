@@ -2,23 +2,23 @@
 
 $font-size: 4rem;
 
-@include desktop-rules {
-  #main .projects nav {
-    right: 55rem;
+// @include desktop-rules {
+//   #main .projects nav {
+//     right: 55rem;
 
-    & svg {
-      right: 10rem;
+//     & svg {
+//       right: 10rem;
 
-      &.about {
-        right: 18rem;
-      }
+//       &.about {
+//         right: 18rem;
+//       }
 
-      &.contact {
-        right: 17rem;
-      }
-    }
-  }
-}
+//       &.contact {
+//         right: 17rem;
+//       }
+//     }
+//   }
+// }
 
 nav {
   width: 100%;
@@ -75,8 +75,8 @@ nav {
   @include desktop-rules {
     width: 35rem;
     height: 23rem;
-    bottom: 5rem;
-    right: 10rem;
+    bottom: 2rem;
+    right: 5rem;
     // transform: rotateY(-30deg) scale(1) translateX(-20rem);
 
     svg {
@@ -124,15 +124,14 @@ $max: length($colors);
 $dash: 40;
 $dash-gap: 100;
 $dash-space: $dash * ($max - 1) + $dash-gap * $max;
-$time: 8s;
+$time: 12s;
 $time-step: $time/$max;
 
 @for $item from 1 through $num-links {
   nav svg:nth-child(#{$num-links}n + #{$item}) {
 
     & .text {
-      border: 1px solid green;
-      fill-opacity: 0;
+      fill-opacity: 0.05;
       stroke-linejoin: round;
       stroke-dasharray: $dash $dash-space;
       stroke-dashoffset: 0;
@@ -152,19 +151,19 @@ $time-step: $time/$max;
     }
 
     &:hover .text {
-      fill-opacity: 0.25;
+      fill-opacity: 0.35;
       stroke-dasharray: 20 80;
       stroke-width: 5;
     }
 
     &.active:hover .text {
-      fill-opacity: 0.25;
+      fill-opacity: 0.35;
       stroke-dasharray: 20 80;
       stroke-width: 5;
     }
 
     &.active .text {
-      fill-opacity: 0.1;
+      fill-opacity: 0.2;
       stroke-dasharray: 10 40;
       // stroke-width: 8;
     }

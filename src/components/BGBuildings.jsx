@@ -2,7 +2,7 @@ import '../assets/scss/BGBuildings.scss'
 
 export default function BGBuildings({ page }) {
   const num_stores = 12;
-  const num_street_lights = 4;
+  const num_street_lights = 0;
 
   const onClickProjects = e => {
     if (page != 'projects') {
