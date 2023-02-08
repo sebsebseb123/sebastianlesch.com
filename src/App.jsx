@@ -22,37 +22,21 @@ function App() {
     let isMobile = checkIfMobile();
 
     // If isMobile, then create an event listener for device orientation.
-    if (isMobile) {
-      const handleDeviceOrientation = e => {
-        const alleyway = document.querySelector('.alleyway');
-        const x = e.beta;
-        const y = e.gamma;
-        const width = 90;
-        const height = 90;
-        const xPercent = ((x / width) * 40) + 30;
-        const yPercent = ((y / height) * 40) + 40;
-        alleyway.style.setProperty('perspective-origin', xPercent + '% ' + yPercent + '%');
-      }
-      window.addEventListener('deviceorientation', handleDeviceOrientation);
-      return () => {
-        window.removeEventListener('deviceorientation', handleDeviceOrientation);
-      }
+    if (isMobile) return;
+
+    const handleMouseMove = e => {
+      const alleyway = document.querySelector('.alleyway');
+      const x = e.clientX;
+      const y = e.clientY;
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      const xPercent = ((x / width) * 40) + 30;
+      const yPercent = ((y / height) * 40) + 40;
+      alleyway.style.setProperty('perspective-origin', xPercent + '% ' + yPercent + '%');
     }
-    else {
-      const handleMouseMove = e => {
-        const alleyway = document.querySelector('.alleyway');
-        const x = e.clientX;
-        const y = e.clientY;
-        const width = window.innerWidth;
-        const height = window.innerHeight;
-        const xPercent = ((x / width) * 40) + 30;
-        const yPercent = ((y / height) * 40) + 40;
-        alleyway.style.setProperty('perspective-origin', xPercent + '% ' + yPercent + '%');
-      }
-      window.addEventListener('mousemove', handleMouseMove);
-      return () => {
-        window.removeEventListener('mousemove', handleMouseMove);
-      }
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
     }
   }, []);
 
