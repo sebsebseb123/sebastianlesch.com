@@ -2,41 +2,51 @@
 
 $font-size: 4rem;
 
-#main .projects nav {
-  right: 55rem;
+@include desktop-rules {
+  #main .projects nav {
+    right: 55rem;
 
-  & svg {
-    right: 10rem;
+    & svg {
+      right: 10rem;
 
-    &.about {
-      right: 18rem;
-    }
+      &.about {
+        right: 18rem;
+      }
 
-    &.contact {
-      right: 17rem;
+      &.contact {
+        right: 17rem;
+      }
     }
   }
 }
 
 nav {
+  width: 100%;
+  height: 35%;
+  position: absolute;
+  bottom: 0;
+  right: 0;
   perspective: 3000px;
   perspective-origin: 50% 40%;
   transition: right 3s;
+  // background-color: green;
 
   svg {
     cursor: pointer;
     text-transform: uppercase;
-    font-size: $font-size;
+    font-size: 5rem;
+    // background-color: red;
     margin: -0.25rem auto;
-    transform: rotateY(-30deg) scale(1) translateX(-20rem);
+    transform: rotateY(-10deg) scale(1.25) translateX(0rem);
     transition: transform 0.25s ease-in-out, right 3s;
-    display: inline-block;
+    display: block;
     position: absolute;
-    right: -10rem;
+    right: 3rem;
 
     &.about {
       width: 13rem;
-      bottom: 15rem;
+      bottom: 14rem;
+      right: 4.5rem;
     }
 
     &.projects {
@@ -46,25 +56,49 @@ nav {
 
     &.contact {
       width: 14rem;
-      bottom: 0rem;
+      bottom: 2rem;
     }
 
     &:hover {
-      transform: rotateY(-25deg) scale(1.3) translateX(-20rem);
+      transform: rotateY(-5deg) scale(1.45) translateX(0rem);
     }
 
     &.active:hover {
-      transform: rotateY(-25deg) scale(1.3) translateX(-20rem);
+      transform: rotateY(-5deg) scale(1.45) translateX(0rem);
     }
 
     &.active {
-      transform: rotateY(-27deg) scale(1.25) translateX(-20rem);
+      transform: rotateY(-7deg) scale(1.4) translateX(0rem);
     }
+  }
 
-    @include media-small {
+  @include desktop-rules {
+    width: 35rem;
+    height: 23rem;
+    bottom: 5rem;
+    right: 10rem;
+    // transform: rotateY(-30deg) scale(1) translateX(-20rem);
+
+    svg {
+      right: -10rem;
       font-size: 5rem;
       margin: 1.5rem auto;
       transform: rotateY(-30deg) scale(2) translateX(-10rem);
+
+      &.about {
+        width: 13rem;
+        bottom: 15rem;
+      }
+
+      &.projects {
+        width: 16rem;
+        bottom: 8rem;
+      }
+
+      &.contact {
+        width: 14rem;
+        bottom: 0rem;
+      }
 
       &:hover {
         transform: rotateY(-25deg) scale(2.3) translateX(-10rem);
@@ -78,9 +112,7 @@ nav {
         transform: rotateY(-27deg) scale(2.25) translateX(-10rem);
       }
     }
-
   }
-
 }
 
 $colors: #00ff9f, #00b8ff, #001eff, #bd00ff, #d600ff;

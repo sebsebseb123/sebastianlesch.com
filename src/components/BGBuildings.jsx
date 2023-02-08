@@ -5,14 +5,10 @@ export default function BGBuildings({ page }) {
   const num_street_lights = 12;
 
   const onClickProjects = e => {
-    console.log(e.target.classList);
-    console.log('click');
-
     if (page != 'projects') {
       return;
     }
 
-    // Check if class is "sign12", then redirect to projects page. Target = _blank
     if (e.target.classList.contains('sign11')) {
       console.log('in');
       window.open('https://longslice.com', '_blank');
@@ -33,6 +29,12 @@ export default function BGBuildings({ page }) {
 
   return (
     <>
+      <div className="mobile copy about-copy">Hi, I'm Sebastian.<br />I use all kinds of tools to make some pretty neat things.</div>
+      <div className="mobile copy projects-copy">I love working on fun projects that require creativity and problem solving.</div>
+      <div className="mobile copy contact-copy"><a href="mailto:sebastian.lesch@gmail.com">sebastian.lesch@gmail.com</a></div>
+
+
+
       <div className="nightsky"></div>
       <div className="alleyway" data-numstores={num_stores}>
         <div className="copy about-copy">Hi, I'm Sebastian.<br />I use all kinds of tools to make some pretty neat things.</div>
