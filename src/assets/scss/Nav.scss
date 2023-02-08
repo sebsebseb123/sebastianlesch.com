@@ -51,12 +51,12 @@ nav {
 
     &.projects {
       width: 16rem;
-      bottom: 8rem;
+      bottom: 10rem;
     }
 
     &.contact {
       width: 14rem;
-      bottom: 2rem;
+      bottom: 6rem;
     }
 
     &:hover {
@@ -138,7 +138,7 @@ $time-step: $time/$max;
       stroke-dashoffset: 0;
       animation: stroke-it $time infinite linear;
       transition: stroke-dasharray 1s, fill-opacity 2s, stroke-width 2s;
-      text-shadow: 0 0 10px rgb(98, 98, 255);
+      // text-shadow: 0 0 10px rgb(98, 98, 255);
 
       @for $item from 1 through $max {
         &:nth-child(#{$max}n + #{$item}) {

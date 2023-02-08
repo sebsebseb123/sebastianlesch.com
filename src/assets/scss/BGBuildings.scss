@@ -2,7 +2,7 @@
 @import 'animations';
 
 $num-store-elements: 12;
-$num-streetlight-elements: 12;
+$num-streetlight-elements: 4;
 $avg-store-width: 400px;
 $num-skyline-images: 8;
 $num-sign-images: 24;
@@ -28,24 +28,24 @@ $sign-bg-colors: (
   width: 75px;
   height: 75px;
   animation: sign-pulse 1s infinite linear;
-  filter: contrast(1) saturate(1) brightness(0.8) grayscale(10%) drop-shadow(0 0 4px #FFF9) hue-rotate(0deg);
+  filter: contrast(1) saturate(1) brightness(0.8) grayscale(10%) drop-shadow(0 0 0px #FFF9) hue-rotate(0deg);
 
-  &:hover {
-    filter: contrast(1.25) saturate(1.25) brightness(1) grayscale(0%) drop-shadow(0 0 6px #FFFF) hue-rotate(0deg);
-  }
+  // &:hover {
+  //   filter: contrast(1.25) saturate(1.25) brightness(1) grayscale(0%) drop-shadow(0 0 1px #FFFF) hue-rotate(0deg);
+  // }
 }
 
 @keyframes sign-pulse {
   0% {
-    filter: contrast(1) saturate(1) brightness(0.8) grayscale(10%) drop-shadow(0 0 4px #FFF9) hue-rotate(0deg);
+    filter: contrast(1) saturate(1) brightness(0.8) grayscale(10%) drop-shadow(0 0 0px #FFF9) hue-rotate(0deg);
   }
 
   50% {
-    filter: contrast(1.25) saturate(1.25) brightness(1) grayscale(0%) drop-shadow(0 0 6px #FFFF) hue-rotate(0deg);
+    filter: contrast(1.25) saturate(1.25) brightness(1) grayscale(0%) drop-shadow(0 0 1px #FFFF) hue-rotate(0deg);
   }
 
   100% {
-    filter: contrast(1) saturate(1) brightness(0.8) grayscale(10%) drop-shadow(0 0 4px #FFF9) hue-rotate(0deg);
+    filter: contrast(1) saturate(1) brightness(0.8) grayscale(10%) drop-shadow(0 0 0px #FFF9) hue-rotate(0deg);
   }
 
 }
@@ -105,10 +105,10 @@ $sign-bg-colors: (
     bottom: 400%;
     height: auto;
     opacity: 1;
-    box-shadow: 0 0 10px rgb(170, 238, 255);
+    box-shadow: 0 0 5px rgb(170, 238, 255);
 
     & a {
-      text-shadow: 0 0 5px rgb(170, 238, 255);
+      text-shadow: 0 0 2px rgb(170, 238, 255);
       color: #ffffff;
       text-decoration: none;
     }
@@ -316,7 +316,8 @@ $sign-bg-colors: (
         }
 
         &.back {
-          filter: saturate(1.5) brightness(0.9) contrast(1.5) grayscale(40%) drop-shadow(0 0 100px #FAA6);
+          filter: saturate(1.5) brightness(0.9) contrast(1.5) grayscale(40%);
+          // filter: saturate(1.5) brightness(0.9) contrast(1.5) grayscale(40%) drop-shadow(0 0 100px #FAA6);
           transform: translateX($avg-store-width * $num-store-elements / -2) translateY($avg-store-width * -1) translateZ($avg-store-width * $num-store-elements / -2);
           background-image: url("./../img/skyline#{random($num-skyline-images)}.png");
           background-repeat: no-repeat;
@@ -371,11 +372,11 @@ $sign-bg-colors: (
               background-size: percentage((random(100) / 100) + 0.5);
               background-color: nth($sign-bg-colors, random(length($sign-bg-colors)));
               background-image: url("./../img/sign#{random($num-sign-images)}.png");
-              filter: saturate(0.75) brightness($brightness) grayscale(70%) drop-shadow(0 0 5px rgba(random(200)+100, random(150)+100, random(150)+100, $brightness)) hue-rotate($hue + deg);
+              filter: saturate(0.75) brightness($brightness) grayscale(70%) hue-rotate($hue + deg);
 
-              &:hover {
-                filter: saturate(1.5) brightness($brightness+0.5) grayscale(20%) drop-shadow(0 0 7px rgba(random(200)+100, random(150)+100, random(150)+100, $brightness+0.5)) hue-rotate($hue + deg);
-              }
+              // &:hover {
+              //   filter: saturate(1.5) brightness($brightness+0.5) grayscale(20%) drop-shadow(0 0 7px rgba(random(200)+100, random(150)+100, random(150)+100, $brightness+0.5)) hue-rotate($hue + deg);
+              // }
 
               @if $page =='projects' and $direction =='left' and $i ==12 {
                 display: none;

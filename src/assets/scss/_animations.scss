@@ -8,12 +8,11 @@ $num-city-images: 15;
     .store#{$i} {
       background-image: url("./../img/city#{$start-image}.png");
       background-size: 100% $start-size;
-      filter: saturate(0.75) brightness(0.9) contrast(2) grayscale(70%) drop-shadow(0 0 20px rgba(random(100)+155, random(100)+155, random(100)+155, 0.75));
-      // filter: saturate(1.25) brightness(0.9) contrast(2) grayscale(20%) drop-shadow(0 0 10px rgba(random(100)+155, random(100)+155, random(100)+155, 0.5)) hue-rotate(random(360)+deg);
+      filter: saturate(0.75) brightness(0.9) contrast(2) grayscale(70%);
       // animation: store-shift#{$i} (random(40)+20)+s infinite;
 
       &:hover {
-        filter: saturate(1.25) brightness(0.9) contrast(2) grayscale(30%) drop-shadow(0 0 50px rgba(random(100)+155, random(100)+155, random(100)+155, 1));
+        filter: saturate(1.25) brightness(0.9) contrast(2) grayscale(30%);
       }
 
     }
