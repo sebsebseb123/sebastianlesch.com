@@ -1,0 +1,13 @@
+@keyframes sign-pulse {
+  0% {
+    filter: contrast(1) saturate(1) brightness(0.8) grayscale(10%) hue-rotate(0deg);
+  }
+
+  50% {
+    filter: contrast(1.25) saturate(1.25) brightness(1) grayscale(0%) hue-rotate(0deg);
+  }
+
+  100% {
+    filter: contrast(1) saturate(1) brightness(0.8) grayscale(10%) hue-rotate(0deg);
+  }
+}

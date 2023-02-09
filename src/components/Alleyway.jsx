@@ -1,6 +1,6 @@
-import '../assets/scss/BGBuildings.scss'
+import '../assets/scss/Alleyway.scss'
 
-export default function BGBuildings({ page }) {
+export default function Alleyway({ page }) {
   const num_stores = 12;
   const num_street_lights = 0;
 
@@ -31,7 +31,7 @@ export default function BGBuildings({ page }) {
     <>
       <div className="mobile copy about-copy">Hi, I'm Sebastian.<br />I use all kinds of tools to make some pretty neat things.</div>
       <div className="mobile copy projects-copy">I love working on fun projects that require creativity and problem solving.</div>
-      <div className="mobile copy contact-copy"><a href="mailto:sebastian.lesch@gmail.com">sebastian.lesch@gmail.com</a></div>
+      <div className="mobile copy contact-copy">Sebastian Lesch<br />416.727.3687<br /><a href="mailto:sebastian.lesch@gmail.com">sebastian.lesch@gmail.com</a></div>
 
 
 
@@ -70,7 +70,7 @@ export default function BGBuildings({ page }) {
             )
           })}
         </div>
-        <div className="copy contact-copy"><a href="mailto:sebastian.lesch@gmail.com">sebastian.lesch@gmail.com</a></div>
+        <div className="copy contact-copy">Sebastian Lesch<br />416.727.3687<br /><a href="mailto:sebastian.lesch@gmail.com">sebastian.lesch@gmail.com</a></div>
         <div className="wall back"></div>
       </div>
     </>
