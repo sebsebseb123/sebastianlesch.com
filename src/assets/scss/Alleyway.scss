@@ -82,25 +82,27 @@ $sign-bg-colors: (
   bottom: 40%;
 }
 
+.sign-transition.copy,
 .sign-transition .copy {
-  transition: opacity $itx-timing $ease-func, bottom $itx-timing $ease-func;
+  transition: opacity $itx-timing $ease-func, bottom $itx-timing $ease-func, top $itx-timing $ease-func;
 }
 
+.page-transition.copy,
 .page-transition .copy {
-  transition: opacity $itx-red-shift-timing $ease-func, bottom $itx-red-shift-timing $ease-func;
+  transition: opacity $itx-red-shift-timing $ease-func, bottom $itx-red-shift-timing $ease-func, top $itx-red-shift-timing $ease-func;
 }
 
 .mobile.copy {
   display: block;
   position: absolute;
-  top: 0;
+  top: 0%;
   left: 1rem;
   bottom: initial;
   margin: 1rem 0;
   width: calc(100% - 2rem);
-  height: auto;
-  z-index: 1;
-  opacity: 0;
+  height: min-content;
+  z-index: 99;
+  opacity: 1;
   font-size: 1.25rem;
 }
 
@@ -112,6 +114,12 @@ $sign-bg-colors: (
   .copy {
     display: block;
   }
+}
+
+.sign-transition.copy,
+.page-transition.copy {
+  opacity: 0;
+  top: -10%;
 }
 
 .sign-transition .copy,
@@ -145,249 +153,234 @@ $sign-bg-colors: (
   transition: background-image 2s 1s;
 }
 
-@each $page in $pages {
+#main.home .alleyway {
+  left: -30%;
 
-  .#{$page} {
-    &.background {
-      background-color: rgb(math.random(100)+20, math.random(50), math.random(100)+20);
+  @include desktop-rules {
+    left: 20%;
+  }
+}
+
+#main.projects .alleyway {
+  left: 130%;
+
+  @include desktop-rules {
+    left: 80%;
+  }
+}
+
+#main.contact .alleyway {
+  left: 50%;
+
+  @include desktop-rules {
+    left: 50%;
+  }
+}
+
+.alleyway {
+  position: absolute;
+  top: 50%;
+  margin-left: math.div($avg-store-width, -2);
+  margin-top: math.div($avg-store-width, -2);
+  transform-style: preserve-3d;
+  width: $avg-store-width;
+  height: $avg-store-width;
+  perspective: 3000px;
+  transition: top 2s 1s, left 2s 1s;
+  z-index: 0;
+
+  @include desktop-rules {
+    perspective: math.div($avg-store-width * $num-store-elements, 2);
+  }
+
+  .wall {
+    display: flex;
+    align-items: stretch;
+    width: $avg-store-width * $num-store-elements;
+    height: $avg-store-width;
+    position: absolute;
+
+    // opacity: 0.75;
+    &.right {
+      transform: rotateY(270deg) translateZ(math.div($avg-store-width * $num-store-elements, 2) - $avg-store-width);
     }
 
+    &.left {
+      transform: rotateY(90deg) translateZ(math.div($avg-store-width * $num-store-elements, -2));
+    }
 
-    .alleyway {
-      position: absolute;
-      top: 50%;
-      margin-left: math.div($avg-store-width, -2);
-      margin-top: math.div($avg-store-width, -2);
-      transform-style: preserve-3d;
-      width: $avg-store-width;
-      height: $avg-store-width;
-      perspective: 3000px;
-      transition: top 2s 1s, left 2s 1s;
-      z-index: 0;
+    & .store {
+      background-repeat: no-repeat;
+      background-position: bottom;
+      box-sizing: border-box;
+      transition: filter 0.5s;
+      margin: 0 -1px;
+    }
 
-      @if $page =='home' {
-        left: -50%;
-        perspective-origin: 30% 60%;
+    &.right {
+      @include store-list;
+    }
+
+    &.left {
+      @include store-list;
+    }
+
+    &.back {
+      filter: saturate(1.5) brightness(0.9) contrast(1.5) grayscale(40%);
+      transform: translateX($avg-store-width * -1.5) translateY($avg-store-width * -0.75) translateZ(math.div($avg-store-width * 2 * $num-store-elements, -2));
+      background-image: url("./../img/skyline.png");
+      background-repeat: no-repeat;
+      background-position: bottom;
+      background-size: 100% 100%;
+      width: $avg-store-width * 4;
+      height: $avg-store-width * 2;
+      image-rendering: auto;
+      transition: transform $itx-red-shift-timing $itx-red-shift-delay;
+    }
+  }
+
+  & .sign {
+    position: absolute;
+    transition: filter $itx-timing;
+    background-repeat: no-repeat;
+    background-position: center;
+    image-rendering: pixelated;
+
+    width: 75px;
+    height: 75px;
+    filter: contrast(1) saturate(1) brightness(1) grayscale(10%) drop-shadow(0 0 0 #0000);
+
+    &:hover {
+      cursor: pointer;
+      filter: contrast(1.25) saturate(1.25) brightness(1) grayscale(0%) drop-shadow(0 0 5px #FFF);
+    }
+
+    &.projects {
+      left: 0px;
+    }
+
+    &.tech {
+      right: 0px;
+    }
+
+    @for $i from 1 through $num-store-elements {
+      &.sign-pos-#{$i} {
+        transform: translateZ(($avg-store-width * $i) - 2300);
       }
+    }
 
-      @else if $page =='projects' {
-        left: 140%;
-        perspective-origin: 60% 60%;
-      }
+    &.sign-key-longslice {
+      bottom: 220px;
+      background-image: url("./../img/longslice.gif");
+      background-color: #000B;
+      background-size: 80%;
+      height: 40px;
+    }
 
-      @else if $page =='contact' {
-        left: 50%;
-        perspective-origin: 50% 60%;
-      }
+    &.sign-key-aviary-brewpub {
+      bottom: 160px;
+      background-image: url("./../img/aviary.svg");
+      background-color: #101820BB;
+      background-size: 80%;
+      height: 80px;
+      width: 80px;
+    }
 
-      @include desktop-rules {
-        top: 50%;
-        perspective: math.div($avg-store-width * $num-store-elements, 2);
+    &.sign-key-one-red-streamer {
+      bottom: 220px;
+      background-image: url("./../img/ors.svg");
+      background-color: #86005eBB;
+      background-size: 80%;
+      border-radius: 10px;
+      height: 100px;
+      width: 70px;
+    }
 
-        @if $page =='home' {
-          left: 20%;
-        }
+    &.sign-key-pbs-music {
+      bottom: 180px;
+      background-image: url("./../img/pbs.png");
+      background-size: 100%;
+      height: 80px;
+      width: 80px;
+    }
 
-        @else if $page =='projects' {
-          left: 80%;
-        }
+    &.sign-key-react-js {
+      bottom: 200px;
+      background-image: url("./../img/react.svg");
+      background-color: white;
+      border-radius: 10px;
+      background-size: 80%;
 
-        @else if $page =='contact' {
-          left: 50%;
-        }
-      }
-
-
-      .wall {
+      &::before {
+        content: 'React';
+        font-size: 1em;
+        color: black;
+        position: static;
+        left: 0;
+        right: 0;
+        bottom: 10px;
         display: flex;
-        align-items: stretch;
-        width: $avg-store-width * $num-store-elements;
-        height: $avg-store-width;
-        position: absolute;
-
-        // opacity: 0.75;
-        &.right {
-          transform: rotateY(270deg) translateZ(math.div($avg-store-width * $num-store-elements, 2) - $avg-store-width);
-        }
-
-        &.left {
-          transform: rotateY(90deg) translateZ(math.div($avg-store-width * $num-store-elements, -2));
-        }
-
-        & .store {
-          background-repeat: no-repeat;
-          background-position: bottom;
-          box-sizing: border-box;
-          transition: filter 0.5s;
-          margin: 0 -1px;
-        }
-
-        &.right {
-          @include store-list;
-        }
-
-        &.left {
-          @include store-list;
-        }
-
-        &.back {
-          filter: saturate(1.5) brightness(0.9) contrast(1.5) grayscale(40%);
-          transform: translateX($avg-store-width * -1.5) translateY($avg-store-width * -0.75) translateZ(math.div($avg-store-width * 2 * $num-store-elements, -2));
-          background-image: url("./../img/skyline.png");
-          background-repeat: no-repeat;
-          background-position: bottom;
-          background-size: 100% 100%;
-          width: $avg-store-width * 4;
-          height: $avg-store-width * 2;
-          image-rendering: auto;
-          transition: transform $itx-red-shift-timing $itx-red-shift-delay;
-        }
+        justify-content: center;
+        align-items: flex-end;
+        height: 100%;
+        line-height: 2rem;
       }
+    }
 
-      & .sign {
-        position: absolute;
-        transition: filter $itx-timing;
-        background-repeat: no-repeat;
-        background-position: center;
-        image-rendering: pixelated;
+    &.sign-key-javascript {
+      bottom: 180px;
+      background-image: url("./../img/javascript.svg");
+    }
 
-        width: 75px;
-        height: 75px;
-        filter: contrast(1) saturate(1) brightness(1) grayscale(10%) drop-shadow(0 0 0 #0000);
+    &.sign-key-html-css {
+      bottom: 240px;
+      background-size: 90%;
+      height: 100px;
+      background-image: url("./../img/css.svg");
+      background-color: white;
+      border-radius: 10px;
+      background-size: 80%;
+    }
 
-        &:hover {
-          cursor: pointer;
-          filter: contrast(1.25) saturate(1.25) brightness(1) grayscale(0%) drop-shadow(0 0 5px #FFF);
-        }
+    &.sign-key-drupal {
+      bottom: 160px;
+      background-size: 90%;
+      height: 100px;
+      background-image: url("./../img/drupal.svg");
+      background-color: white;
+      border-radius: 10px;
+      background-size: 80%;
 
-        &.projects {
-          left: 0px;
-        }
-
-        &.tech {
-          right: 0px;
-        }
-
-        @for $i from 1 through $num-store-elements {
-          &.sign-pos-#{$i} {
-            transform: translateZ(($avg-store-width * $i) - 2300);
-          }
-        }
-
-        &.sign-key-longslice {
-          bottom: 220px;
-          background-image: url("./../img/longslice.gif");
-          background-color: #000B;
-          background-size: 80%;
-          height: 40px;
-        }
-
-        &.sign-key-aviary-brewpub {
-          bottom: 160px;
-          background-image: url("./../img/aviary.svg");
-          background-color: #101820BB;
-          background-size: 80%;
-          height: 80px;
-          width: 80px;
-        }
-
-        &.sign-key-one-red-streamer {
-          bottom: 220px;
-          background-image: url("./../img/ors.svg");
-          background-color: #86005eBB;
-          background-size: 80%;
-          border-radius: 10px;
-          height: 100px;
-          width: 70px;
-        }
-
-        &.sign-key-pbs-music {
-          bottom: 180px;
-          background-image: url("./../img/pbs.png");
-          background-size: 100%;
-          height: 80px;
-          width: 80px;
-        }
-
-        &.sign-key-react-js {
-          bottom: 200px;
-          background-image: url("./../img/react.svg");
-          background-color: white;
-          border-radius: 10px;
-          background-size: 80%;
-
-          &::before {
-            content: 'React';
-            font-size: 1em;
-            color: black;
-            position: static;
-            left: 0;
-            right: 0;
-            bottom: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: flex-end;
-            height: 100%;
-            line-height: 2rem;
-          }
-        }
-
-        &.sign-key-javascript {
-          bottom: 180px;
-          background-image: url("./../img/javascript.svg");
-        }
-
-        &.sign-key-html-css {
-          bottom: 240px;
-          background-size: 90%;
-          height: 100px;
-          background-image: url("./../img/css.svg");
-          background-color: white;
-          border-radius: 10px;
-          background-size: 80%;
-        }
-
-        &.sign-key-drupal {
-          bottom: 160px;
-          background-size: 90%;
-          height: 100px;
-          background-image: url("./../img/drupal.svg");
-          background-color: white;
-          border-radius: 10px;
-          background-size: 80%;
-
-          &::before {
-            content: 'Drupal';
-            font-size: 1em;
-            color: black;
-            position: static;
-            top: 10px;
-            left: 0;
-            right: 0;
-            // bottom: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: flex-end;
-            // height: 100%;
-            line-height: 2rem;
-          }
-        }
-
-        &.sign-key-php {
-          bottom: 250px;
-          background-size: 90%;
-          background-image: url("./../img/php.svg");
-        }
-
-        &.sign-key-aws {
-          bottom: 160px;
-          background-size: 90%;
-          height: 60px;
-          background-image: url("./../img/aws.svg");
-          background-size: 70%;
-          background-color: white;
-        }
+      &::before {
+        content: 'Drupal';
+        font-size: 1em;
+        color: black;
+        position: static;
+        top: 10px;
+        left: 0;
+        right: 0;
+        // bottom: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        // height: 100%;
+        line-height: 2rem;
       }
+    }
+
+    &.sign-key-php {
+      bottom: 250px;
+      background-size: 90%;
+      background-image: url("./../img/php.svg");
+    }
+
+    &.sign-key-aws {
+      bottom: 160px;
+      background-size: 90%;
+      height: 60px;
+      background-image: url("./../img/aws.svg");
+      background-size: 70%;
+      background-color: white;
     }
   }
 }

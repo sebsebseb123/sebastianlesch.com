@@ -38,6 +38,7 @@ div {
 #main {
   height: 100vh;
   position: relative;
+  overflow: hidden;
 }
 
 #main.projects nav {
@@ -54,6 +55,7 @@ nav {
   height: auto;
   bottom: $nav-padding;
   right: $nav-padding;
+  z-index: 99;
 
   @include desktop-rules {
     width: $nav-width;
