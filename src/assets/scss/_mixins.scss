@@ -1,6 +1,6 @@
-$itx-timing: 0.5s;
-$itx-red-shift-timing: 2.5s;
-$itx-red-shift-delay: 1s;
+$itx-timing: 0.25s;
+$itx-red-shift-timing: 2s;
+$itx-red-shift-delay: 0.75s;
 
 @mixin store-list {
   @for $i from 1 through $num-store-elements {

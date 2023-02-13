@@ -11,7 +11,7 @@ const checkIfMobile = () => {
 }
 
 function App() {
-  const [page, setPage] = useState('about');
+  const [page, setPage] = useState('home');
 
   // Create a variable flag to check if the device is mobile.
   const isMobile = checkIfMobile();
@@ -24,7 +24,7 @@ function App() {
     // Define tweakable vars.
     const degreeFreedom = 20;
     const pagePerspectiveDefs = {
-      about: {
+      home: {
         x: 30,
         y: 60,
       },
@@ -34,7 +34,7 @@ function App() {
       },
       contact: {
         x: 50,
-        y: 40,
+        y: 60,
       },
     };
 
@@ -55,7 +55,7 @@ function App() {
     // Define tweakable vars.
     const degreeFreedom = 10;
     const pagePerspectiveDefs = {
-      about: {
+      home: {
         x: 30,
         y: 60,
       },
@@ -84,7 +84,6 @@ function App() {
 
 
   useEffect(() => {
-    console.log('isMobile: ' + isMobile);
     // If isMobile, then create an event listener for device orientation.
     if (isMobile) {
       return;

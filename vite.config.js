@@ -13,6 +13,9 @@ export default defineConfig({
       preferBuiltins: false,
     }),
   ],
+  server: {
+    host: '0.0.0.0'
+  },
   define: {
     global: 'window',
   },

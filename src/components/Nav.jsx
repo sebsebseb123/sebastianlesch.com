@@ -1,7 +1,7 @@
 export default function Nav({ onClickNav, page }) {
   const links = [
     {
-      name: 'About',
+      name: 'Home',
       points: '20.5 15.5 15.5 20.5 15.5 30.5 20.5 35.5 65.5 35.5 70.5 30.5 80.5 30.5 85.5 25.5 85.5 20.5 80.5 15.5 25.5 15.5 20.5 15.5',
     },
     {

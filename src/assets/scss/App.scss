@@ -2,16 +2,16 @@
 @import 'mixins';
 @import 'media';
 
-$div-bg: #0b1519AA;
+$div-bg: #0b1519BB;
 $div-stroke: #165872AA;
 $div-accent-stroke: #93d122AA;
-$div-btn-bg: #16587269;
+$div-btn-bg: #165872AA;
 $div-btn-stroke: #fac4ffBC;
 $div-btn-active-bg: #eef3b342;
 $div-btn-active-stroke: #eef3b3BC;
-$text-color: #fac4ff69;
-$text-stroke: #fac4ff69;
-$text-active-color: #eef3b369;
+$text-color: #fac4ff42;
+$text-stroke: #f25eff;
+$text-active-color: #eef3b342;
 $text-active-stroke: #eef3b369;
 $text-hover-color: #fde7ffef;
 $text-hover-stroke: #22ffc8b8;
@@ -100,8 +100,8 @@ nav {
       fill: $text-color;
       stroke-width: 0.2px;
       stroke: $text-stroke;
-      stroke-dasharray: 20 2;
-      stroke-dashoffset: 44;
+      stroke-dasharray: 12 4 4;
+      stroke-dashoffset: 40;
       transition: font-size $itx-timing, fill $itx-timing, stroke $itx-timing, stroke-width $itx-timing, stroke-dasharray $itx-timing, stroke-dashoffset $itx-timing;
       animation: dash 3s linear forwards infinite;
 
@@ -128,71 +128,6 @@ nav {
     @keyframes dash {
       to {
         stroke-dashoffset: 0;
-      }
-    }
-
-    & .about {
-      // background-color: red;
-      // fill: red;
-      // width: 13rem;
-      // bottom: 14rem;
-      // right: 4.5rem;
-    }
-
-    & .projects {
-      // fill: blue;
-      // font-size: 2rem;
-      // width: 16rem;
-      // bottom: 10rem;
-    }
-
-    & .contact {
-      // fill: orange;
-      // width: 14rem;
-      // bottom: 6rem;
-    }
-
-    @include desktop-rules {
-      & .about {
-        // width: 13rem;
-        // bottom: 15rem;
-        // right: -10rem;
-      }
-
-      & .projects {
-        // width: 16rem;
-        // bottom: 8rem;
-      }
-
-      & .contact {
-        // width: 14rem;
-        // bottom: 0rem;
-      }
-    }
-
-    &:hover {
-      // transform: rotateY(-5deg) scale(1.45) translateX(0rem);
-    }
-
-    & .active:hover {
-      // transform: rotateY(-5deg) scale(1.45) translateX(0rem);
-    }
-
-    & .active {
-      // transform: rotateY(-7deg) scale(1.4) translateX(0rem);
-    }
-
-    @include desktop-rules {
-      &:hover {
-        // transform: rotateY(-25deg) scale(2.3) translateX(-10rem);
-      }
-
-      & .active:hover {
-        // transform: rotateY(-25deg) scale(2.3) translateX(-10rem);
-      }
-
-      & .active {
-        // transform: rotateY(-27deg) scale(2.25) translateX(-10rem);
       }
     }
   }
