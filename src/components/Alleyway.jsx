@@ -23,32 +23,32 @@ export default function Alleyway({ page }) {
       signs: [
         {
           position: '10',
-          copy: "React JS",
+          copy: () => <><span className="glow">React JS</span><br />Builds dynamic UI and SPAs.</>,
           key: "react-js",
         },
         {
           position: '9',
-          copy: "Javascript",
+          copy: () => <><span className="glow">Javascript</span><br />Adds interactivity and functionality.</>,
           key: "javascript",
         },
         {
           position: '8',
-          copy: "HTML/CSS",
+          copy: () => <><span className="glow">HTML/CSS</span><br />Visually appealing websites across devices.</>,
           key: "html-css",
         },
         {
           position: '7',
-          copy: "Drupal",
+          copy: () => <><span className="glow">Drupal</span><br />CMS framework for complex web applications.</>,
           key: "drupal",
         },
         {
           position: '6',
-          copy: "PHP",
+          copy: () => <><span className="glow">PHP</span><br />Server-side scripting.<br />A WWW foundation.</>,
           key: "php",
         },
         {
           position: '5',
-          copy: "AWS",
+          copy: () => <><span className="glow">AWS</span><br />Computing, hosting, storage, databases, machine learning, more...</>,
           key: "aws",
         },
       ],
@@ -64,25 +64,25 @@ export default function Alleyway({ page }) {
       signs: [
         {
           position: '10',
-          copy: "Longslice",
+          copy: () => <><span className="glow">Longslice.com</span><br />Drupal based e-commerce, cross platform, SEO, etc...</>,
           key: "longslice",
           link: "https://longslice.com",
         },
         {
           position: '9',
-          copy: "Aviary Brewpub",
+          copy: () => <><span className="glow">AviaryBrewpub.com</span><br />PHP, content management, cross platform, SEO, etc...</>,
           key: "aviary-brewpub",
           link: "https://aviarybrewpub.com",
         },
         {
           position: '8',
-          copy: "One Red Streamer",
+          copy: () => <><span className="glow">OneRedStreamer.com</span><br />Static one-page site with vanilla HTML/CSS/JS.</>,
           key: "one-red-streamer",
           link: "https://oneredstreamer.com",
         },
         {
           position: '7',
-          copy: "PBS Music",
+          copy: () => <><span className="glow">PBSMusic.org</span><br />Static one-page site with vanilla HTML/CSS/JS.</>,
           key: "pbs-music",
           link: "https://pbsmusic.org/",
         },
@@ -92,7 +92,7 @@ export default function Alleyway({ page }) {
       copy: () => {
         return (
           <>
-            Sebastian Lesch<br />416.727.3687<br /><a href="mailto:sebastian.lesch@gmail.com">sebastian.lesch@gmail.com</a>
+            <span className="glow">Sebastian Lesch</span><br />416.727.3687<br /><a href="mailto:sebastian.lesch@gmail.com">sebastian.lesch@gmail.com</a>
           </>
         )
       },
@@ -119,6 +119,10 @@ export default function Alleyway({ page }) {
 
   // Create a click handler for the sign elements. It should populate the .copy-display element with the appropriate copy.
   const onClickSign = e => {
+    // If we're on the contact page, do nothing.
+    if (page == 'contact') return;
+
+    // Get the sign key.
     const signKey = e.target.getAttribute('data-sign-key');
     // If the sign doesn't exist, return.
     if (!pageInfo.signExists(page, signKey)) return;
@@ -172,7 +176,7 @@ export default function Alleyway({ page }) {
         <div className="copy copy-display">
           {copy}
           {link ? (<a className='project-link' href={link} target="_blank">
-            <svg width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M21 3L15 3M21 3L12 12M21 3V9" stroke="white" stroke-linecap="round" stroke-linejoin="round" /> <path d="M21 13V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V5C3 3.89543 3.89543 3 5 3H11" stroke="white" stroke-linecap="round" /> </svg>
+            <svg width="24" height="24" viewBox="0 0 24 24" strokeWidth="1.5" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M21 3L15 3M21 3L12 12M21 3V9" stroke="white" strokeLinecap="round" strokeLinejoin="round" /> <path d="M21 13V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V5C3 3.89543 3.89543 3 5 3H11" stroke="white" strokeLinecap="round" /> </svg>
           </a>) : ''}
         </div>
         <div className="wall left">

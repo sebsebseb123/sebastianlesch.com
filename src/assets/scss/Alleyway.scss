@@ -59,6 +59,10 @@ $sign-bg-colors: (
   border-radius: 4px;
   transition: opacity $itx-timing $ease-func, bottom $itx-timing $ease-func;
 
+  .glow {
+    text-decoration: underline overline double #7daece68 1px;
+  }
+
   & a {
     text-shadow: 0 0 2px rgb(170, 238, 255);
     color: #ffffff;
