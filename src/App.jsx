@@ -106,9 +106,7 @@ function App() {
   return (
     <>
       <div id="main" className={"container " + page}>
-        <div className="background">
-          <Alleyway page={page} />
-        </div>
+        <Alleyway page={page} />
         <Nav onClickNav={onClickNav} page={page} />
       </div>
     </>

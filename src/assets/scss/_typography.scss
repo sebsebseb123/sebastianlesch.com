@@ -1,17 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@700&family=Fredoka+One&family=Major+Mono+Display&family=Righteous&family=Unbounded:wght@900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Righteous&family=Teko:wght@500&family=Unbounded:wght@900&display=swap');
 
 body {
   font-family: 'Unbounded', Helvetica, Arial, sans-serif;
 }
 
+.nav-link,
 .copy {
   font-family: 'Righteous', Helvetica, Arial, sans-serif;
 }
 
-text.ghost {
-  // font-family: 'Chakra Petch', sans-serif;
-  // font-family: 'Fredoka One', cursive;
-  // font-family: 'Major Mono Display', monospace;
-  // font-family: 'Righteous', cursive;
-  font-family: 'Unbounded', cursive;
+.site-title {
+  font-family: 'Teko', Helvetica, Arial, sans-serif;
 }

@@ -1,3 +1,4 @@
+@use 'sass:list';
 @import 'typography';
 @import 'mixins';
 @import 'media';
@@ -15,6 +16,9 @@ $text-active-color: #eef3b342;
 $text-active-stroke: #eef3b369;
 $text-hover-color: #fde7ffef;
 $text-hover-stroke: #22ffc8b8;
+$site-title-color: #f25eff;
+$site-title-hover-color: #f25eff69;
+$site-title-stroke: #5effdc;
 $color-none: #0000;
 
 $nav-width: 25rem;
@@ -39,98 +43,165 @@ div {
   height: 100vh;
   position: relative;
   overflow: hidden;
+  // perspective: 999px;
 }
 
 #main.projects nav {
   @include desktop-rules {
-    bottom: $nav-padding;
+    top: $nav-padding;
     right: calc(100% - $nav-width - $nav-padding);
   }
 }
 
-nav {
-  transition: right $itx-timing;
+.perspective-container {
   position: absolute;
-  width: $nav-width-mobile;
-  height: auto;
-  bottom: $nav-padding;
-  right: $nav-padding;
   z-index: 99;
+  width: calc(($nav-width + $nav-padding) * 2);
+  height: calc(($nav-width + $nav-padding) * 2);
+  top: $nav-padding;
+  right: calc(($nav-width + $nav-padding) * -1);
+  // background-color: green;
+  perspective: 666px;
+}
+
+.nav-container {
+  transform: rotateY(350deg);
+  position: absolute;
+  width: calc(($nav-width + $nav-padding) * 2);
+  height: calc(($nav-width + $nav-padding) * 2);
+  top: 0;
+  right: 0;
+  transform-style: preserve-3d;
+  z-index: 100;
+
+  // background-color: #F006;
+}
+
+.menu-open {
+  background-color: #F0F6;
+  width: 200px;
+  height: calc(($nav-width + $nav-padding) * 2);
+  transform: rotateY(90deg);
+  position: absolute;
+  left: $nav-width;
+  top: 0;
+}
+
+.nav-background,
+nav {
+  // transition: right $itx-timing;
+  position: absolute;
+  width: 50%;
+  height: auto;
+  z-index: 99;
+  top: $nav-padding;
+  // right: initial;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+  background: linear-gradient(230deg, rgba(7, 4, 57, 1) 25%, rgba(0, 212, 255, 0.5) 80%);
+  border-radius: 1rem;
+  padding-top: 1rem;
 
   @include desktop-rules {
-    width: $nav-width;
+    // width: $nav-width;
     height: $nav-width;
   }
 
   svg {
-    stroke-linejoin: round;
     display: block;
-
-    @include desktop-rules {}
-
-    .nav-border {
-      transform: scale(0.99);
-      fill: $div-bg;
-      stroke: $div-stroke;
-      stroke-width: 2px;
-
-      .accents {
-        stroke-width: 0.2px;
-        fill: $color-none;
-        stroke: $div-accent-stroke;
-        stroke-dasharray: 50 50 10;
-        stroke-dashoffset: 160;
-        animation: dash 5s linear forwards infinite;
-      }
-    }
-
-    .nav-link-border polygon {
-      fill: $div-btn-bg;
-      stroke: $div-btn-stroke;
-      stroke-width: 0.5px;
-      transition: fill $itx-timing, stroke $itx-timing;
-
-      &.active {
-        fill: $div-btn-active-bg;
-        stroke: $div-btn-active-stroke;
-      }
-    }
+    width: 100%;
+    background: linear-gradient(90deg, rgba(7, 4, 57, 0.5) 25%, rgba(0, 212, 255, 0.33) 80%);
 
     text {
-      cursor: pointer;
-      font-size: 0.5rem;
-      fill: $text-color;
-      stroke-width: 0.2px;
-      stroke: $text-stroke;
-      stroke-dasharray: 12 4 4;
+      font-size: 3.5rem;
+      height: 2rem;
+    }
+
+    .glow {
+      transition:
+        stroke-width $itx-timing,
+        stroke-dasharray $itx-timing,
+        stroke-dashoffset $itx-timing,
+        opacity $itx-timing;
+
+      stroke-width: 5px;
+      fill: none;
+      stroke: $site-title-stroke;
+      stroke-dasharray: 4 16;
       stroke-dashoffset: 40;
-      transition: font-size $itx-timing, fill $itx-timing, stroke $itx-timing, stroke-width $itx-timing, stroke-dasharray $itx-timing, stroke-dashoffset $itx-timing;
-      animation: dash 3s linear forwards infinite;
+      animation: dash 2s linear forwards infinite;
+      $glow-colors: #00d4ff,
+      #b739d2,
+      #5d22ff;
+      opacity: 0.25;
 
-      &:hover {
-        font-size: 0.55rem;
-        fill: $text-hover-color;
-        stroke: $text-hover-stroke;
-        stroke-width: 1px;
-        stroke-dasharray: 2 20 3 30;
-        stroke-dashoffset: 220;
-      }
-
-      &.active {
-        cursor: default;
-        font-size: 0.5rem;
-        fill: $text-active-color;
-        stroke: $text-active-stroke;
-        stroke-width: 0.5px;
-        stroke-dasharray: 2 20 3 30;
-        stroke-dashoffset: 110;
+      // Check for .glow-0, .glow-1, .glow-2.
+      // Create a stagered animation delay for each.
+      @for $i from 0 through 2 {
+        &.glow-#{$i} {
+          animation-delay: calc(0.33s * $i);
+          stroke: list.nth($glow-colors, $i + 1);
+        }
       }
     }
 
-    @keyframes dash {
-      to {
-        stroke-dashoffset: 0;
+    &:hover .glow {
+      stroke-width: 2px;
+      stroke-dasharray: 6 34;
+      stroke-dashoffset: 80;
+      opacity: 1;
+    }
+  }
+
+  hr {
+    border: 2px solid;
+  }
+
+  .site-title-underline {
+    width: calc(100% + 100px);
+    margin-left: -10%;
+
+    &.site-title-underline-1 {
+      width: 100%;
+      margin-left: 0;
+      opacity: 0.75;
+    }
+  }
+
+  .nav-link {
+    cursor: pointer;
+    font-size: 2rem;
+    // background-color: #0F05;
+    padding: 0.5rem $nav-padding;
+    text-align: right;
+    background-color: #0000;
+    border-radius: 1rem;
+    transition: background-color $itx-timing;
+
+    // Loop over the number of nav links to dynamically set the width.
+    @for $i from 0 through 2 {
+      &.nav-link-#{$i} {
+        width: calc(400 - ($i * 100)) + px;
+
+        hr {
+          margin-right: -$nav-padding;
+          opacity: calc(0.5 - ($i * 0.2));
+          margin-top: 20px;
+        }
       }
     }
+
+    &:hover {
+      background-color: #0006;
+    }
+  }
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 0;
   }
 }

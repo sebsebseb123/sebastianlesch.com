@@ -11,18 +11,3 @@ $itx-red-shift-delay: 0.75s;
     }
   }
 }
-
-@mixin special-sign {
-  background-color: #0000;
-  border-radius: 2px;
-  border: 0px solid;
-  background-size: 100%;
-  width: 75px;
-  height: 75px;
-  // animation: sign-pulse 1s infinite linear;
-  filter: contrast(1) saturate(1) brightness(1) grayscale(10%) drop-shadow(0 0 0 #0000);
-
-  &:hover {
-    filter: contrast(1.25) saturate(1.25) brightness(1) grayscale(0%) drop-shadow(0 0 5px #FFF);
-  }
-}

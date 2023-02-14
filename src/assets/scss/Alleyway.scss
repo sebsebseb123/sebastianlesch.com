@@ -15,13 +15,6 @@ $pages: (
   'contact',
 );
 
-$sign-bg-colors: (
-  #FFF6,
-  #000B,
-  #FFF0,
-);
-
-
 .background {
   height: 100%;
   width: 100%;
@@ -51,7 +44,7 @@ $sign-bg-colors: (
   display: none;
   text-align: center;
   position: absolute;
-  background-color: #0009;
+  background: linear-gradient(180deg, rgba(11, 3, 148, 0.5) 10%, rgba(204, 0, 255, 0.25) 90%);
   padding: 1rem;
   transform: translateZ(1200px);
   width: 60%;
@@ -142,6 +135,7 @@ $sign-bg-colors: (
   image-rendering: auto;
   position: absolute;
   opacity: 0.9;
+  z-index: -1;
 }
 
 #main .alleyway .wall.bottom {
@@ -187,7 +181,7 @@ $sign-bg-colors: (
   height: $avg-store-width;
   perspective: 3000px;
   transition: top 2s 1s, left 2s 1s;
-  z-index: 0;
+  z-index: 98;
 
   @include desktop-rules {
     perspective: math.div($avg-store-width * $num-store-elements, 2);
@@ -239,13 +233,13 @@ $sign-bg-colors: (
     }
   }
 
-  & .sign {
+  .sign {
     position: absolute;
     transition: filter $itx-timing;
     background-repeat: no-repeat;
     background-position: center;
     image-rendering: pixelated;
-
+    z-index: 99;
     width: 75px;
     height: 75px;
     filter: contrast(1) saturate(1) brightness(1) grayscale(10%) drop-shadow(0 0 0 #0000);

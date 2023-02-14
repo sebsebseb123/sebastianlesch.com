@@ -168,7 +168,7 @@ export default function Alleyway({ page }) {
   }, [page]);
 
   return (
-    <>
+    <div className='background'>
       <div className={"mobile copy copy-display " + transitionState}>
         {copy}
         {link ? (<a className='project-link' href={link} target="_blank">
@@ -176,7 +176,6 @@ export default function Alleyway({ page }) {
         </a>) : ''}
       </div>
 
-      <div className="nightsky"></div>
       <div className={"alleyway " + transitionState} data-numstores={num_stores}>
         <div className="copy copy-display">
           {copy}
@@ -211,6 +210,7 @@ export default function Alleyway({ page }) {
         <div className="wall bottom"></div>
         <div className="wall back"></div>
       </div>
-    </>
+      <div className="nightsky"></div>
+    </div>
   )
 }

@@ -15,36 +15,40 @@ export default function Nav({ onClickNav, page }) {
   ];
 
   return (
-    <>
-      <nav>
-        <svg viewBox="0 0 100 100">
-          <g className={"nav-link-border"} >
-            {links.map((l, i) => {
-              return (
-                <polygon key={l.name + i + '-nav-link-border'} className={l.name.toLowerCase() + (l.name.toLowerCase() == page ? ' active' : '')} points={l.points} />
-              )
-            })}
-          </g>
-          <g className="nav-border">
-            <polygon points=".5 20.5 20.5 .5 80.5 .5 100.5 20.5 100.5 80.5 80.5 100.5 20.5 100.5 .5 80.5 .5 20.5" />
-            <g className="accents">
-              <polyline points="25.47 .5 5.5 20.5 5.5 85.5" />
-              <polyline points="15.5 95.5 80.5 95.5 100.57 75.43" />
-              <line x1="5.5" y1="80.5" x2="20.5" y2="95.5" />
-              <line x1="75.35" y1=".5" x2="100.5" y2="25.56" />
-              <line x1="20.5" y1="5.5" x2="80.5" y2="5.5" />
-              <line x1="95.5" y1="20.5" x2="95.5" y2="80.5" />
-            </g>
-          </g>
+    <div className="perspective-container">
+      <div className="nav-container">
+        <div className="menu-open"></div>
+        <nav>
+          <hr className="site-title-underline site-title-underline-0" />
+          <svg className="nav-svg" viewBox="0 0 400 60" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="rainbow" x1="0" x2="0" y1="0" y2="100%" gradientUnits="userSpaceOnUse" >
+                <stop stopColor="#00d4ff" offset="0%" />
+                <stop stopColor="#b739d2" offset="100%" />
+              </linearGradient>
+              <text id="site-title" textAnchor="middle" x="200" y="47">SebastianLesch.com</text>
+            </defs>
+            <use href="#site-title" className="site-title glow glow-0" />
+            <use href="#site-title" className="site-title glow glow-1" />
+            <use href="#site-title" className="site-title glow glow-2" />
+            <use href="#site-title" fill="url(#rainbow)" className="site-title" />
+          </svg>
+          <hr className="site-title-underline site-title-underline-1" />
           {links.map((l, i) => {
             return (
-              <text key={l.name + i + '-nav-text'} className={l.name.toLowerCase() + (l.name.toLowerCase() == page ? ' active' : '')} onClick={onClickNav} value={l.name.toLowerCase()} textAnchor="start" x="23%" y={(i * 25) + 28}>
+              <div
+                key={l.name}
+                className={(l.name.toLowerCase() + (l.name.toLowerCase() == page ? ' active ' : ' ') + ('nav-link nav-link-' + i))}
+                onClick={onClickNav}
+                value={l.name.toLowerCase()}
+              >
                 {l.name}
-              </text>
+                <hr />
+              </div>
             )
           })}
-        </svg>
-      </nav>
-    </>
+        </nav >
+      </div >
+    </div >
   )
 }
