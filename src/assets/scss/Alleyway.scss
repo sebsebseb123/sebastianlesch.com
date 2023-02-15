@@ -8,17 +8,11 @@ $avg-store-width: 400px;
 $num-sign-images: 24;
 $num-floor-images: 3;
 $num-nightsky-images: 3;
-$ease-func: cubic-bezier(0.680, -0.550, 0.265, 1.550);
 $pages: (
   'home',
   'projects',
   'contact',
 );
-
-.background {
-  height: 100%;
-  width: 100%;
-}
 
 @each $page in $pages {
   #main.#{$page} .alleyway {
@@ -41,16 +35,16 @@ $pages: (
 }
 
 .copy {
-  display: none;
+  opacity: 0;
   text-align: center;
   position: absolute;
-  background: linear-gradient(180deg, rgba(11, 3, 148, 0.5) 10%, rgba(204, 0, 255, 0.25) 90%);
+  background: linear-gradient(180deg, rgba(11, 3, 148, 0.75) 10%, rgba(204, 0, 255, 0.25) 90%);
   padding: 1rem;
-  transform: translateZ(1200px);
+  transform: translateZ(800px);
   width: 60%;
   left: 20%;
   border-radius: 4px;
-  transition: opacity $itx-timing $ease-func, bottom $itx-timing $ease-func;
+  transition: opacity $itx-timing $ease-func, bottom $itx-timing $ease-func, font-size $itx-red-shift-timing;
 
   .glow {
     text-decoration: underline overline double #7daece68 1px;
@@ -73,6 +67,11 @@ $pages: (
 
 #main.contact .copy {
   bottom: 40%;
+
+  &.mobile {
+    bottom: 30%;
+    font-size: 1.5rem;
+  }
 }
 
 .sign-transition.copy,
@@ -88,15 +87,15 @@ $pages: (
 .mobile.copy {
   display: block;
   position: absolute;
-  top: 0%;
   left: 1rem;
-  bottom: initial;
+  bottom: 10%;
   margin: 1rem 0;
   width: calc(100% - 2rem);
   height: min-content;
   z-index: 99;
-  opacity: 1;
-  font-size: 1.25rem;
+  opacity: 0;
+  font-size: 1.75rem;
+  padding: 1rem 1.5rem;
 }
 
 @include desktop-rules {
@@ -109,10 +108,15 @@ $pages: (
   }
 }
 
-.sign-transition.copy,
-.page-transition.copy {
+.sign-transition.copy.mobile,
+.page-transition.copy.mobile {
   opacity: 0;
-  top: -10%;
+  bottom: 100%;
+}
+
+.ready.copy.mobile {
+  opacity: 1;
+  bottom: 15%;
 }
 
 .sign-transition .copy,
@@ -122,8 +126,10 @@ $pages: (
 }
 
 .ready .copy {
-  opacity: 1;
-  bottom: 0%;
+  @include desktop-rules {
+    opacity: 1;
+    bottom: 5%;
+  }
 }
 
 .nightsky {
@@ -138,28 +144,82 @@ $pages: (
   z-index: -1;
 }
 
-#main .alleyway .wall.bottom {
-  transform: rotateX(90deg) translateZ(math.div($avg-store-width * $num-store-elements, 2) - $avg-store-width);
-  background-image: url("./../img/floor.jpg");
-  background-size: 20% 5%;
-  height: $avg-store-width * $num-store-elements;
-  width: $avg-store-width;
-  transition: background-image 2s 1s;
+#main {
+  .alleyway .wall.bottom {
+    transform: rotateX(90deg) translateZ(math.div($avg-store-width * $num-store-elements, 2) - $avg-store-width);
+    background-image: url("./../img/floor.jpg");
+    background-size: 100% 50%;
+    height: $avg-store-width * $num-store-elements;
+    width: $avg-store-width * 4;
+
+    @include desktop-rules {
+      transform: rotateX(90deg) translateZ(math.div($avg-store-width * $num-store-elements, 2) - $avg-store-width);
+      width: $avg-store-width;
+    }
+  }
+
+  &.home .alleyway .wall.bottom {
+    transform: rotateX(110deg) translateZ(2030px) rotateZ(325deg);
+
+    @include desktop-rules {
+      transform: rotateX(90deg) translateZ(math.div($avg-store-width * $num-store-elements, 2) - $avg-store-width);
+      width: $avg-store-width;
+    }
+  }
+
+  &.projects .alleyway .wall.bottom {
+    transform: rotateX(110deg) translateZ(2030px) rotateZ(310deg);
+
+    @include desktop-rules {
+      transform: rotateX(90deg) translateZ(math.div($avg-store-width * $num-store-elements, 2) - $avg-store-width);
+      width: $avg-store-width;
+    }
+  }
+
+  &.contact .alleyway .wall.bottom {
+    transform: rotateX(110deg) translateZ(2030px) rotateZ(310deg);
+
+    @include desktop-rules {
+      transform: rotateX(90deg) translateZ(math.div($avg-store-width * $num-store-elements, 2) - $avg-store-width);
+      width: $avg-store-width;
+    }
+  }
+
 }
 
 #main.home .alleyway {
   left: -30%;
+  perspective-origin: 30% 60%;
 
   @include desktop-rules {
     left: 20%;
+  }
+
+  .sign.projects {
+    opacity: 0;
+  }
+
+  .sign.tech:hover {
+    cursor: pointer;
+    filter: contrast(1.25) saturate(1.25) brightness(1) grayscale(0%) drop-shadow(0 0 5px #FFF);
   }
 }
 
 #main.projects .alleyway {
   left: 130%;
+  perspective-origin: 65% 60%;
 
   @include desktop-rules {
     left: 80%;
+  }
+
+  .sign.tech {
+    opacity: 0;
+  }
+
+  .sign.projects:hover {
+    cursor: pointer;
+    filter: contrast(1.25) saturate(1.25) brightness(1) grayscale(0%) drop-shadow(0 0 5px #FFF);
   }
 }
 
@@ -168,6 +228,17 @@ $pages: (
 
   @include desktop-rules {
     left: 50%;
+  }
+
+  .sign {
+    filter: contrast(1.25) saturate(1.25) brightness(1) grayscale(0%) drop-shadow(0 0 0 #FFF);
+    border: none;
+
+    @for $i from 1 through $num-store-elements {
+      &.sign-pos-#{$i} {
+        transform: translateZ(($avg-store-width * $i) - 2300) scaleX(0.5) scaleY(0.5);
+      }
+    }
   }
 }
 
@@ -180,11 +251,13 @@ $pages: (
   width: $avg-store-width;
   height: $avg-store-width;
   perspective: 3000px;
-  transition: top 2s 1s, left 2s 1s;
+  // transition: top 2s 1s, left 2s 1s;
   z-index: 98;
+  transition: perspective-origin $itx-timing, left $itx-timing;
 
   @include desktop-rules {
     perspective: math.div($avg-store-width * $num-store-elements, 2);
+    transition: none;
   }
 
   .wall {
@@ -193,30 +266,27 @@ $pages: (
     width: $avg-store-width * $num-store-elements;
     height: $avg-store-width;
     position: absolute;
+    background-size: contain;
+    background-position: bottom;
+    will-change: transform;
 
     // opacity: 0.75;
     &.right {
-      transform: rotateY(270deg) translateZ(math.div($avg-store-width * $num-store-elements, 2) - $avg-store-width);
+      background-image: url("./../img/wall.gif");
+      transform: rotateY(300deg) translateZ(math.div($avg-store-width * $num-store-elements, 2) - ($avg-store-width * 1.5));
+
+      @include desktop-rules {
+        transform: rotateY(270deg) translateZ(math.div($avg-store-width * $num-store-elements, 2) - $avg-store-width);
+      }
     }
 
     &.left {
-      transform: rotateY(90deg) translateZ(math.div($avg-store-width * $num-store-elements, -2));
-    }
+      background-image: url("./../img/wall.gif");
+      transform: rotateY(80deg) translateZ(math.div($avg-store-width * $num-store-elements, -2));
 
-    & .store {
-      background-repeat: no-repeat;
-      background-position: bottom;
-      box-sizing: border-box;
-      transition: filter 0.5s;
-      margin: 0 -1px;
-    }
-
-    &.right {
-      @include store-list;
-    }
-
-    &.left {
-      @include store-list;
+      @include desktop-rules {
+        transform: rotateY(90deg) translateZ(math.div($avg-store-width * $num-store-elements, -2));
+      }
     }
 
     &.back {
@@ -235,19 +305,15 @@ $pages: (
 
   .sign {
     position: absolute;
-    transition: filter $itx-timing;
+    transition: opacity $itx-red-shift-timing $itx-red-shift-delay, filter $itx-timing, ;
+    opacity: 1;
     background-repeat: no-repeat;
     background-position: center;
     image-rendering: pixelated;
     z-index: 99;
     width: 75px;
     height: 75px;
-    filter: contrast(1) saturate(1) brightness(1) grayscale(10%) drop-shadow(0 0 0 #0000);
-
-    &:hover {
-      cursor: pointer;
-      filter: contrast(1.25) saturate(1.25) brightness(1) grayscale(0%) drop-shadow(0 0 5px #FFF);
-    }
+    filter: contrast(1) saturate(1) brightness(1) grayscale(5%) drop-shadow(0 0 2px #FFF);
 
     &.projects {
       left: 0px;
@@ -266,28 +332,34 @@ $pages: (
     &.sign-key-longslice {
       bottom: 220px;
       background-image: url("./../img/longslice.gif");
-      background-color: #000B;
+      background-color: #000;
       background-size: 80%;
       height: 40px;
+      border: 2px solid white;
+      border-radius: 10px;
     }
 
     &.sign-key-aviary-brewpub {
       bottom: 160px;
       background-image: url("./../img/aviary.svg");
-      background-color: #101820BB;
+      background-color: #101820;
       background-size: 80%;
       height: 80px;
       width: 80px;
+      border: 2px solid white;
+      border-radius: 10px;
     }
 
     &.sign-key-one-red-streamer {
       bottom: 220px;
       background-image: url("./../img/ors.svg");
-      background-color: #86005eBB;
+      background-color: #86005e;
       background-size: 80%;
       border-radius: 10px;
       height: 100px;
       width: 70px;
+      border: 2px solid white;
+      border-radius: 10px;
     }
 
     &.sign-key-pbs-music {
@@ -296,6 +368,8 @@ $pages: (
       background-size: 100%;
       height: 80px;
       width: 80px;
+      border: 2px solid white;
+      border-radius: 10px;
     }
 
     &.sign-key-react-js {
@@ -324,6 +398,7 @@ $pages: (
     &.sign-key-javascript {
       bottom: 180px;
       background-image: url("./../img/javascript.svg");
+      border-radius: 10px;
     }
 
     &.sign-key-html-css {
@@ -366,10 +441,14 @@ $pages: (
       bottom: 250px;
       background-size: 90%;
       background-image: url("./../img/php.svg");
+      background-color: white;
+      height: 50px;
+      border-radius: 10px;
     }
 
     &.sign-key-aws {
       bottom: 160px;
+      border-radius: 10px;
       background-size: 90%;
       height: 60px;
       background-image: url("./../img/aws.svg");

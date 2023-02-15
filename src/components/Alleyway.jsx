@@ -64,25 +64,25 @@ export default function Alleyway({ page }) {
       signs: [
         {
           position: '10',
-          copy: () => <><span className="glow">Longslice.com</span><br />Drupal based e-commerce, cross platform, SEO, etc...</>,
+          copy: () => <><span className="glow"><a href="https://longslice.com" target="_blank">Longslice.com</a></span><br />Drupal based e-commerce, cross platform, SEO, more...</>,
           key: "longslice",
           link: "https://longslice.com",
         },
         {
           position: '9',
-          copy: () => <><span className="glow">AviaryBrewpub.com</span><br />PHP, content management, cross platform, SEO, etc...</>,
+          copy: () => <><span className="glow"><a href="https://aviarybrewpub.com" target="_blank">AviaryBrewpub.com</a></span><br />PHP, content management, cross platform, SEO, more...</>,
           key: "aviary-brewpub",
           link: "https://aviarybrewpub.com",
         },
         {
           position: '8',
-          copy: () => <><span className="glow">OneRedStreamer.com</span><br />Static one-page site with vanilla HTML/CSS/JS.</>,
+          copy: () => <><span className="glow"><a href="https://oneredstreamer.com" target="_blank">OneRedStreamer.com</a></span><br />Static one-page site with vanilla HTML/CSS/JS.</>,
           key: "one-red-streamer",
           link: "https://oneredstreamer.com",
         },
         {
           position: '7',
-          copy: () => <><span className="glow">PBSMusic.org</span><br />Static one-page site with vanilla HTML/CSS/JS.</>,
+          copy: () => <><span className="glow"><a href="https://pbsmusic.org/" target="_blank">PBSMusic.org</a></span><br />Static one-page site with vanilla HTML/CSS/JS.</>,
           key: "pbs-music",
           link: "https://pbsmusic.org/",
         },
@@ -92,7 +92,7 @@ export default function Alleyway({ page }) {
       copy: () => {
         return (
           <>
-            <span className="glow">Sebastian Lesch</span><br />416.727.3687<br /><a href="mailto:sebastian.lesch@gmail.com">sebastian.lesch@gmail.com</a>
+            <span className="glow">Sebastian Lesch</span><br />M: 416.727.3687<br /><a href="mailto:sebastian.lesch@gmail.com">sebastian.lesch@gmail.com</a>
           </>
         )
       },
@@ -183,32 +183,22 @@ export default function Alleyway({ page }) {
             <svg width="24" height="24" viewBox="0 0 24 24" strokeWidth="1.5" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M21 3L15 3M21 3L12 12M21 3V9" stroke="white" strokeLinecap="round" strokeLinejoin="round" /> <path d="M21 13V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V5C3 3.89543 3.89543 3 5 3H11" stroke="white" strokeLinecap="round" /> </svg>
           </a>) : ''}
         </div>
-        <div className="wall left">
-          {Array.from(Array(num_stores).keys()).map((i) => {
-            return (
-              <svg key={'left-store' + (i + 1)} className={'store store' + (i + 1)} viewBox="0 0 100 100" />
-            );
-          })}
-        </div>
+
+        <div className="wall left"></div>
+        <div className="wall right"></div>
+        <div className="wall bottom"></div>
+        <div className="wall back"></div>
+
         {pageInfo.projects.signs.map(sign => {
           return (
             <div key={sign.key} onClick={onClickSign} data-sign-key={sign.key} className={'sign projects sign-pos-' + (sign.position) + ' sign-key-' + (sign.key)}></div>
           )
         })}
-        <div className="wall right">
-          {Array.from(Array(num_stores).keys()).map((i) => {
-            return (
-              <svg key={'right-store' + (i + 1)} className={'store store' + (i + 1)} viewBox="0 0 100 100" />
-            )
-          })}
-        </div>
         {pageInfo.home.signs.map(sign => {
           return (
             <div key={sign.key} onClick={onClickSign} data-sign-key={sign.key} className={'sign tech sign-pos-' + (sign.position) + ' sign-key-' + (sign.key)}></div>
           )
         })}
-        <div className="wall bottom"></div>
-        <div className="wall back"></div>
       </div>
       <div className="nightsky"></div>
     </div>

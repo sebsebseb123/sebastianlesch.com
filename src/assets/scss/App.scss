@@ -1,4 +1,5 @@
 @use 'sass:list';
+@use 'sass:math';
 @import 'typography';
 @import 'mixins';
 @import 'media';
@@ -35,7 +36,7 @@ body {
   color: $text-hover-color;
 }
 
-div {
+* {
   box-sizing: border-box;
 }
 
@@ -43,71 +44,120 @@ div {
   height: 100vh;
   position: relative;
   overflow: hidden;
-  // perspective: 999px;
 }
 
-#main.projects nav {
-  @include desktop-rules {
-    top: $nav-padding;
-    right: calc(100% - $nav-width - $nav-padding);
-  }
-}
+$menu-nav-width: 60px;
 
-.perspective-container {
-  position: absolute;
+.nav-perspective-container {
+  position: fixed;
   z-index: 99;
   width: calc(($nav-width + $nav-padding) * 2);
   height: calc(($nav-width + $nav-padding) * 2);
-  top: $nav-padding;
-  right: calc(($nav-width + $nav-padding) * -1);
+  top: calc((($nav-width + $nav-padding) * -2) + $menu-nav-width);
+  // right: 50%;
+  right: calc((($nav-width + $nav-padding) * -1));
   // background-color: green;
   perspective: 666px;
+  transition: top ($itx-timing * 2) $ease-func;
+
+  @include desktop-rules {
+    // top: calc(-100% + 165px);
+  }
+
+  .nav-container {
+    transform: rotateY(180deg);
+    position: absolute;
+    width: calc(($nav-width + $nav-padding) * 2);
+    height: calc(($nav-width + $nav-padding) * 2);
+    top: 0;
+    right: 0;
+    transform-style: preserve-3d;
+    z-index: 100;
+    transition: transform ($itx-timing * 2) $ease-func;
+
+    // background-color: #F006;
+  }
+
+  &.nav-open {
+    top: 0%;
+
+    .nav-container {
+      transform: rotateY(-10deg);
+    }
+  }
 }
 
-.nav-container {
-  transform: rotateY(350deg);
+
+// Create menu open and close buttons.
+// Create a hamburger style using hr tags.
+.menu-nav {
+  cursor: pointer;
+  width: $menu-nav-width;
+  height: $menu-nav-width;
   position: absolute;
-  width: calc(($nav-width + $nav-padding) * 2);
-  height: calc(($nav-width + $nav-padding) * 2);
-  top: 0;
-  right: 0;
-  transform-style: preserve-3d;
-  z-index: 100;
+  left: 50%;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  z-index: 101;
+  border: 1px ridge #FFF9;
+  border-radius: 5px;
+  background: linear-gradient(90deg, rgba(7, 4, 57, 1) 25%, rgba(0, 212, 255, 0.5) 100%);
 
-  // background-color: #F006;
+
+  hr {
+    display: block;
+    width: 60%;
+    height: 3px;
+    background-color: #fff;
+    border: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &.menu-open {}
+
+  &.menu-close {
+    bottom: initial;
+    top: 0;
+    left: calc(50% - $menu-nav-width);
+
+    hr {
+      position: absolute;
+      transform: rotateZ(45deg);
+
+      &:nth-child(2) {
+        transform: rotateZ(-45deg);
+      }
+    }
+  }
 }
 
-.menu-open {
-  background-color: #F0F6;
-  width: 200px;
-  height: calc(($nav-width + $nav-padding) * 2);
-  transform: rotateY(90deg);
-  position: absolute;
-  left: $nav-width;
-  top: 0;
-}
-
-.nav-background,
 nav {
   // transition: right $itx-timing;
   position: absolute;
   width: 50%;
   height: auto;
   z-index: 99;
-  top: $nav-padding;
+  // top: $nav-padding;
+  top: calc(50vh - (($nav-width + $nav-padding) / 2));
   // right: initial;
   left: 0;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   justify-content: space-between;
-  background: linear-gradient(230deg, rgba(7, 4, 57, 1) 25%, rgba(0, 212, 255, 0.5) 80%);
+  background: linear-gradient(230deg, rgba(7, 4, 57, 1) 25%, rgba(0, 212, 255, 0.95) 80%);
   border-radius: 1rem;
   padding-top: 1rem;
 
   @include desktop-rules {
-    // width: $nav-width;
-    height: $nav-width;
+    // height: $nav-width;
+    top: calc(50vh - (($nav-width + $nav-padding) / 2));
+    background: linear-gradient(230deg, rgba(7, 4, 57, 1) 25%, rgba(0, 212, 255, 0.5) 80%);
   }
 
   svg {
@@ -161,8 +211,9 @@ nav {
   }
 
   .site-title-underline {
-    width: calc(100% + 100px);
-    margin-left: -10%;
+    width: 120%;
+    margin-left: -20%;
+    box-sizing: border-box;
 
     &.site-title-underline-1 {
       width: 100%;
@@ -184,13 +235,23 @@ nav {
     // Loop over the number of nav links to dynamically set the width.
     @for $i from 0 through 2 {
       &.nav-link-#{$i} {
-        width: calc(400 - ($i * 100)) + px;
+        width: percentage(math.div((80 - ($i * 20)), 100));
 
         hr {
           margin-right: -$nav-padding;
           opacity: calc(0.5 - ($i * 0.2));
           margin-top: 20px;
         }
+      }
+    }
+
+    &.active {
+      cursor: default;
+      color: #69696969;
+      background-color: #0003;
+
+      &:hover {
+        background-color: #0003;
       }
     }
 

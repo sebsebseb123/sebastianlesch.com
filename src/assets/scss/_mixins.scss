@@ -1,13 +1,4 @@
 $itx-timing: 0.25s;
 $itx-red-shift-timing: 2s;
 $itx-red-shift-delay: 0.75s;
-
-@mixin store-list {
-  @for $i from 1 through $num-store-elements {
-    .store#{$i} {
-      background-image: url("./../img/city#{$i}.png");
-      background-size: 100% 100%;
-      filter: saturate(0.75) brightness(0.9) contrast(1.5) grayscale(70%);
-    }
-  }
-}
+$ease-func: cubic-bezier(0.680, -0.550, 0.265, 1.550);

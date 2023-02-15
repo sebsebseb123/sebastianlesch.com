@@ -1,4 +1,8 @@
+import { useState } from 'react'
+
 export default function Nav({ onClickNav, page }) {
+  const [menuNavOpen, setMenuNavOpen] = useState(false);
+
   const links = [
     {
       name: 'Home',
@@ -14,10 +18,24 @@ export default function Nav({ onClickNav, page }) {
     },
   ];
 
+  // Click handler for menu nav.
+  // Toggle the menuNavOpen state.
+  const onClickMenuNav = e => {
+    // Always toggle the menuNavOpen state.
+    setMenuNavOpen(!menuNavOpen);
+
+    // If there's a nav value, call the onClickNav handler.
+    const buttonValue = e.target.getAttribute('value');
+    if (buttonValue) {
+      onClickNav(e);
+    }
+  }
+
   return (
-    <div className="perspective-container">
+    <div className={"nav-perspective-container" + (menuNavOpen ? ' nav-open' : '')}>
       <div className="nav-container">
-        <div className="menu-open"></div>
+        <div className="menu-nav menu-open" onClick={onClickMenuNav}><hr /><hr /><hr /></div>
+        <div className="menu-nav menu-close" onClick={onClickMenuNav}><hr /><hr /></div>
         <nav>
           <hr className="site-title-underline site-title-underline-0" />
           <svg className="nav-svg" viewBox="0 0 400 60" xmlns="http://www.w3.org/2000/svg">
@@ -39,7 +57,7 @@ export default function Nav({ onClickNav, page }) {
               <div
                 key={l.name}
                 className={(l.name.toLowerCase() + (l.name.toLowerCase() == page ? ' active ' : ' ') + ('nav-link nav-link-' + i))}
-                onClick={onClickNav}
+                onClick={onClickMenuNav}
                 value={l.name.toLowerCase()}
               >
                 {l.name}
