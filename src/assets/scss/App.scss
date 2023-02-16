@@ -22,7 +22,7 @@ $site-title-hover-color: #f25eff69;
 $site-title-stroke: #5effdc;
 $color-none: #0000;
 
-$nav-width: 25rem;
+$nav-width: 20rem;
 $nav-padding: 2rem;
 $nav-width-mobile: 85vw;
 
@@ -82,7 +82,7 @@ $menu-nav-width: 60px;
     top: 0%;
 
     .nav-container {
-      transform: rotateY(-10deg);
+      transform: rotateY(0deg);
     }
   }
 }
@@ -211,14 +211,13 @@ nav {
   }
 
   .site-title-underline {
-    width: 120%;
-    margin-left: -20%;
+    width: 100%;
     box-sizing: border-box;
 
     &.site-title-underline-1 {
-      width: 100%;
-      margin-left: 0;
-      opacity: 0.75;
+      width: 90%;
+      margin-left: 10%;
+      opacity: 0.7;
     }
   }
 
@@ -235,7 +234,7 @@ nav {
     // Loop over the number of nav links to dynamically set the width.
     @for $i from 0 through 2 {
       &.nav-link-#{$i} {
-        width: percentage(math.div((80 - ($i * 20)), 100));
+        width: percentage(math.div((90 - ($i * 10)), 100));
 
         hr {
           margin-right: -$nav-padding;

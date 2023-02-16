@@ -22,19 +22,21 @@ function App() {
 
   const handleMouseMove = e => {
     // Define tweakable vars.
-    const degreeFreedom = 20;
     const pagePerspectiveDefs = {
       home: {
         x: 20,
         y: 60,
+        degreeFreedom: 20,
       },
       projects: {
         x: 70,
         y: 60,
+        degreeFreedom: 20,
       },
       contact: {
         x: 50,
         y: 60,
+        degreeFreedom: 5,
       },
     };
 
@@ -44,8 +46,8 @@ function App() {
     const y = e.clientY;
     const width = window.innerWidth;
     const height = window.innerHeight;
-    const xPercent = ((x / width) * degreeFreedom) - (degreeFreedom / 2) + pagePerspectiveDefs[page].x;
-    const yPercent = ((y / height) * degreeFreedom) - (degreeFreedom / 2) + pagePerspectiveDefs[page].y;
+    const xPercent = ((x / width) * pagePerspectiveDefs[page].degreeFreedom) - (pagePerspectiveDefs[page].degreeFreedom / 2) + pagePerspectiveDefs[page].x;
+    const yPercent = ((y / height) * pagePerspectiveDefs[page].degreeFreedom) - (pagePerspectiveDefs[page].degreeFreedom / 2) + pagePerspectiveDefs[page].y;
 
     alleyway.style.setProperty('perspective-origin', xPercent + '% ' + yPercent + '%');
   }
@@ -120,21 +122,23 @@ function App() {
   // Have a similar event handler for mobile device orientation.
   const handleDeviceOrientation = e => {
     // Define tweakable vars.
-    const degreeFreedom = 20;
     const pagePerspectiveDefs = {
       home: {
         x: 30,
         y: 60,
         left: -30,
+        degreeFreedom: 20,
       },
       projects: {
         x: 70,
         y: 60,
         left: 140,
+        degreeFreedom: 20,
       },
       contact: {
         x: 50,
         y: 40,
+        degreeFreedom: 5,
       },
     };
 
@@ -142,9 +146,9 @@ function App() {
     const alleyway = document.querySelector('.alleyway');
     const x = e.beta;
     const y = e.gamma;
-    const xPercent = ((x / 360) * degreeFreedom) - (degreeFreedom / 2) + pagePerspectiveDefs[page].x;
+    const xPercent = ((x / 360) * pagePerspectiveDefs[page].degreeFreedom) - (pagePerspectiveDefs[page].degreeFreedom / 2) + pagePerspectiveDefs[page].x;
     const yPercent = pagePerspectiveDefs[page].y;
-    const yLeft = ((y / 360) * degreeFreedom) - (degreeFreedom / 2) + pagePerspectiveDefs[page].left;
+    const yLeft = ((y / 360) * pagePerspectiveDefs[page].degreeFreedom) - (pagePerspectiveDefs[page].degreeFreedom / 2) + pagePerspectiveDefs[page].left;
 
     alleyway.style.setProperty('perspective-origin', xPercent + '% ' + yPercent + '%');
     alleyway.style.setProperty('left', yLeft + '%');
