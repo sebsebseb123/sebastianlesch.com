@@ -1,18 +1,6 @@
 @use 'sass:math';
 @import 'media';
 @import 'mixins';
-@import 'keyframes';
-
-$num-store-elements: 12;
-$avg-store-width: 400px;
-$num-sign-images: 24;
-$num-floor-images: 3;
-$num-nightsky-images: 3;
-$pages: (
-  'home',
-  'projects',
-  'contact',
-);
 
 @each $page in $pages {
   #main.#{$page} .alleyway {
@@ -251,7 +239,6 @@ $pages: (
   width: $avg-store-width;
   height: $avg-store-width;
   perspective: 3000px;
-  // transition: top 2s 1s, left 2s 1s;
   z-index: 98;
   transition: perspective-origin $itx-timing, left $itx-timing;
 
@@ -270,7 +257,6 @@ $pages: (
     background-position: bottom;
     will-change: transform;
 
-    // opacity: 0.75;
     &.right {
       background-image: url("./../img/wall.gif");
       transform: rotateY(300deg) translateZ(math.div($avg-store-width * $num-store-elements, 2) - ($avg-store-width * 1.5));
@@ -428,11 +414,9 @@ $pages: (
         top: 10px;
         left: 0;
         right: 0;
-        // bottom: 10px;
         display: flex;
         justify-content: center;
         align-items: flex-end;
-        // height: 100%;
         line-height: 2rem;
       }
     }

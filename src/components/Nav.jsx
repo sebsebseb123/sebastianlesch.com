@@ -1,30 +1,25 @@
 import { useState } from 'react'
 
 export default function Nav({ onClickNav, page }) {
+  // State for whether the nav menu is open or not.
   const [menuNavOpen, setMenuNavOpen] = useState(false);
 
-  const links = [
-    {
-      name: 'Home',
-      points: '20.5 15.5 15.5 20.5 15.5 30.5 20.5 35.5 65.5 35.5 70.5 30.5 80.5 30.5 85.5 25.5 85.5 20.5 80.5 15.5 25.5 15.5 20.5 15.5',
-    },
-    {
-      name: 'Projects',
-      points: '20.5 40.5 15.5 45.5 15.5 55.5 20.5 60.5 65.5 60.5 70.5 55.5 80.5 55.5 85.5 50.5 85.5 45.5 80.5 40.5 25.5 40.5 20.5 40.5',
-    },
-    {
-      name: 'Contact',
-      points: '20.5 65.5 15.5 70.5 15.5 80.5 20.5 85.5 65.5 85.5 70.5 80.5 80.5 80.5 85.5 75.5 85.5 70.5 80.5 65.5 25.5 65.5 20.5 65.5',
-    },
+  // Define pages.
+  const pages = [
+    'Home',
+    'Projects',
+    'Contact',
   ];
 
-  // Click handler for menu nav.
-  // Toggle the menuNavOpen state.
+  // Click handler for menu nav element.
   const onClickMenuNav = e => {
+    // Stop the click so it doesn't add "#" to the URL.
+    e.preventDefault();
+
     // Always toggle the menuNavOpen state.
     setMenuNavOpen(!menuNavOpen);
 
-    // If there's a nav value, call the onClickNav handler.
+    // If they clicked on a link, call the onClickNav handler.
     const buttonValue = e.target.getAttribute('value');
     if (buttonValue) {
       onClickNav(e);
@@ -34,8 +29,8 @@ export default function Nav({ onClickNav, page }) {
   return (
     <div className={"nav-perspective-container" + (menuNavOpen ? ' nav-open' : '')}>
       <div className="nav-container">
-        <div className="menu-nav menu-open" onClick={onClickMenuNav}><hr /><hr /><hr /></div>
-        <div className="menu-nav menu-close" onClick={onClickMenuNav}><hr /><hr /></div>
+        <a href="#" className="menu-nav menu-open" onClick={onClickMenuNav}><hr /><hr /><hr /></a>
+        <a href="#" className="menu-nav menu-close" onClick={onClickMenuNav}><hr /><hr /></a>
         <nav>
           <hr className="site-title-underline site-title-underline-0" />
           <svg className="nav-svg" viewBox="0 0 400 60" xmlns="http://www.w3.org/2000/svg">
@@ -52,17 +47,18 @@ export default function Nav({ onClickNav, page }) {
             <use href="#site-title" fill="url(#rainbow)" className="site-title" />
           </svg>
           <hr className="site-title-underline site-title-underline-1" />
-          {links.map((l, i) => {
+          {pages.map((pageName, i) => {
             return (
-              <div
-                key={l.name}
-                className={(l.name.toLowerCase() + (l.name.toLowerCase() == page ? ' active ' : ' ') + ('nav-link nav-link-' + i))}
+              <a
+                href="#"
+                key={pageName}
+                className={(pageName.toLowerCase() + (pageName.toLowerCase() == page ? ' active ' : ' ') + ('nav-link nav-link-' + i))}
                 onClick={onClickMenuNav}
-                value={l.name.toLowerCase()}
+                value={pageName.toLowerCase()}
               >
-                {l.name}
+                {pageName}
                 <hr />
-              </div>
+              </a>
             )
           })}
         </nav >

@@ -1,4 +1,37 @@
+$div-bg: #0b1519BB;
+$div-stroke: #165872AA;
+$div-accent-stroke: #93d122AA;
+$div-btn-bg: #165872AA;
+$div-btn-stroke: #fac4ffBC;
+$div-btn-active-bg: #eef3b342;
+$div-btn-active-stroke: #eef3b3BC;
+$text-color: #fac4ff42;
+$text-stroke: #f25eff;
+$text-active-color: #eef3b342;
+$text-active-stroke: #eef3b369;
+$text-hover-color: #fde7ffef;
+$text-hover-stroke: #22ffc8b8;
+$site-title-color: #f25eff;
+$site-title-hover-color: #f25eff69;
+$site-title-stroke: #5effdc;
+$color-none: #0000;
+
+$nav-width: 20rem;
+$nav-padding: 2rem;
+$nav-width-mobile: 85vw;
+
 $itx-timing: 0.25s;
 $itx-red-shift-timing: 2s;
 $itx-red-shift-delay: 0.75s;
 $ease-func: cubic-bezier(0.680, -0.550, 0.265, 1.550);
+
+$num-store-elements: 12;
+$avg-store-width: 400px;
+$num-sign-images: 24;
+$num-floor-images: 3;
+$num-nightsky-images: 3;
+$pages: (
+  'home',
+  'projects',
+  'contact',
+);

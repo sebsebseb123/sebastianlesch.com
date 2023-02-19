@@ -1,25 +1,32 @@
 import { useEffect, useState } from 'react'
 import '../assets/scss/Alleyway.scss'
 
+const homeCopy = () => {
+  return (
+    <>
+      Hi, I'm Sebastian.<br />I use all kinds of tools to make some pretty neat things.
+    </>
+  )
+};
+
 export default function Alleyway({ page }) {
-  const [copy, setCopy] = useState();
-  const [link, setLink] = useState();
-  const [activeSign, setActiveSign] = useState();
+  // Create states for the copy and links.
+  const [activeSign, setActiveSign] = useState({
+    key: '',
+    copy: homeCopy(),
+    link: '',
+  });
   const [transitionState, setTransitionState] = useState('transitioning');
 
+  // Define the number of stores and the timing for the transitions in milliseconds.
   const num_stores = 12;
   const itxSignTiming = 500;
   const itxPageTiming = 2000;
 
+  // Define the copy and links for each page and "store sign".
   const pageInfo = {
     home: {
-      copy: () => {
-        return (
-          <>
-            Hi, I'm Sebastian.<br />I use all kinds of tools to make some pretty neat things.
-          </>
-        )
-      },
+      copy: homeCopy(),
       signs: [
         {
           position: '10',
@@ -97,72 +104,64 @@ export default function Alleyway({ page }) {
         )
       },
     },
-    signExists: (page, signKey) => {
-      // Check to see if there's copy for the sign, based on the sign number being equal to the key.
-      if (pageInfo[page].signs.find(sign => sign.key === signKey)) return true;
-      else return false;
-    },
+    // Helper function to easily get the copy for a sign.
     getSignCopy: (page, signKey) => {
-      // Return back the copy for the sign, based on the sign number being equal to the key.
+      // Return back the copy for the sign.
       return ({
         newCopy: (pageInfo[page].signs.find(sign => sign.key === signKey).copy ?? ''),
         newLink: (pageInfo[page].signs.find(sign => sign.key === signKey).link ?? ''),
       });
     },
-    getPageCopy: (page) => {
-      return ({
-        newCopy: pageInfo[page].copy(),
-        newLink: '',
-      });
-    },
   }
 
-  // Create a click handler for the sign elements. It should populate the .copy-display element with the appropriate copy.
+  // Create a click handler for the street sign elements. It should populate the .copy-display element with the appropriate copy.
   const onClickSign = e => {
-    // If we're on the contact page, do nothing.
-    if (page == 'contact') return;
+    // Stop the click so it doesn't add "#" to the URL.
+    e.preventDefault();
 
     // Get the sign key.
     const signKey = e.target.getAttribute('data-sign-key');
-    // If the sign doesn't exist, return.
-    if (!pageInfo.signExists(page, signKey)) return;
 
-    // Start our transition.
+    // Start our transition state.
     setTransitionState('sign-transition');
 
     // If we click on the same sign, revert the copy back to the page copy.
     if (activeSign == signKey) {
-      // return;
-      const { newCopy, newLink } = pageInfo.getPageCopy(page);
-      // Wait for the transition to finish, then set the transition state to ready.
+      // Wait for the transition to finish, then set the active sign info and the transition state to ready.
       setTimeout(() => {
-        setCopy(newCopy ?? '');
-        setLink(newLink ?? '');
-        setActiveSign('');
+        setActiveSign({
+          key: '',
+          copy: pageInfo[page].copy ?? '',
+          link: '',
+        });
         setTransitionState('ready');
       }, itxSignTiming);
     }
     // Otherwise, set the copy to the sign copy.
     else {
       const { newCopy, newLink } = pageInfo.getSignCopy(page, signKey);
-      // Wait for the transition to finish, then set the transition state to ready.
+      // Wait for the transition to finish, then set the active sign info and the transition state to ready.
       setTimeout(() => {
-        setCopy(newCopy ?? '');
-        setLink(newLink ?? '');
-        setActiveSign(signKey);
+        setActiveSign({
+          key: signKey,
+          copy: newCopy ?? '',
+          link: newLink ?? '',
+        });
         setTransitionState('ready');
       }, itxSignTiming);
     }
-
   }
 
+  // Set the transition state and change the copy when the page changes.
   useEffect(() => {
     setTransitionState('page-transition');
     // Wait for the transition to finish, then set the transition state to ready.
     setTimeout(() => {
-      setCopy(pageInfo[page].copy ?? '');
-      setLink('');
-      setActiveSign('');
+      setActiveSign({
+        key: '',
+        copy: pageInfo[page].copy ?? '',
+        link: '',
+      });
       setTransitionState('ready');
     }, itxPageTiming);
   }, [page]);
@@ -170,18 +169,29 @@ export default function Alleyway({ page }) {
   return (
     <div className='background'>
       <div className={"mobile copy copy-display " + transitionState}>
-        {copy}
-        {link ? (<a className='project-link' href={link} target="_blank">
-          <svg width="24" height="24" viewBox="0 0 24 24" strokeWidth="1.5" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M21 3L15 3M21 3L12 12M21 3V9" stroke="white" strokeLinecap="round" strokeLinejoin="round" /> <path d="M21 13V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V5C3 3.89543 3.89543 3 5 3H11" stroke="white" strokeLinecap="round" /> </svg>
-        </a>) : ''}
+        {activeSign.copy}
+        {activeSign.link ? (
+          <a className='project-link' href={activeSign.link} target="_blank">
+            <svg width="24" height="24" viewBox="0 0 24 24" strokeWidth="1.5" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M21 3L15 3M21 3L12 12M21 3V9" stroke="white" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M21 13V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V5C3 3.89543 3.89543 3 5 3H11" stroke="white" strokeLinecap="round" />
+            </svg>
+          </a>
+        ) : ''}
       </div>
 
       <div className={"alleyway " + transitionState} data-numstores={num_stores}>
+
         <div className="copy copy-display">
-          {copy}
-          {link ? (<a className='project-link' href={link} target="_blank">
-            <svg width="24" height="24" viewBox="0 0 24 24" strokeWidth="1.5" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M21 3L15 3M21 3L12 12M21 3V9" stroke="white" strokeLinecap="round" strokeLinejoin="round" /> <path d="M21 13V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V5C3 3.89543 3.89543 3 5 3H11" stroke="white" strokeLinecap="round" /> </svg>
-          </a>) : ''}
+          {activeSign.copy}
+          {activeSign.link ? (
+            <a className='project-link' href={activeSign.link} target="_blank">
+              <svg width="24" height="24" viewBox="0 0 24 24" strokeWidth="1.5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M21 3L15 3M21 3L12 12M21 3V9" stroke="white" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M21 13V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V5C3 3.89543 3.89543 3 5 3H11" stroke="white" strokeLinecap="round" />
+              </svg>
+            </a>
+          ) : ''}
         </div>
 
         <div className="wall left"></div>
@@ -191,15 +201,17 @@ export default function Alleyway({ page }) {
 
         {pageInfo.projects.signs.map(sign => {
           return (
-            <div key={sign.key} onClick={onClickSign} data-sign-key={sign.key} className={'sign projects sign-pos-' + (sign.position) + ' sign-key-' + (sign.key)}></div>
+            <a key={sign.key} onClick={onClickSign} data-sign-key={sign.key} className={'sign projects sign-pos-' + (sign.position) + ' sign-key-' + (sign.key)}></a>
           )
         })}
         {pageInfo.home.signs.map(sign => {
           return (
-            <div key={sign.key} onClick={onClickSign} data-sign-key={sign.key} className={'sign tech sign-pos-' + (sign.position) + ' sign-key-' + (sign.key)}></div>
+            <a key={sign.key} onClick={onClickSign} data-sign-key={sign.key} className={'sign tech sign-pos-' + (sign.position) + ' sign-key-' + (sign.key)}></a>
           )
         })}
+
       </div>
+
       <div className="nightsky"></div>
     </div>
   )

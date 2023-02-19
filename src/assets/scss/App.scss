@@ -4,28 +4,6 @@
 @import 'mixins';
 @import 'media';
 
-$div-bg: #0b1519BB;
-$div-stroke: #165872AA;
-$div-accent-stroke: #93d122AA;
-$div-btn-bg: #165872AA;
-$div-btn-stroke: #fac4ffBC;
-$div-btn-active-bg: #eef3b342;
-$div-btn-active-stroke: #eef3b3BC;
-$text-color: #fac4ff42;
-$text-stroke: #f25eff;
-$text-active-color: #eef3b342;
-$text-active-stroke: #eef3b369;
-$text-hover-color: #fde7ffef;
-$text-hover-stroke: #22ffc8b8;
-$site-title-color: #f25eff;
-$site-title-hover-color: #f25eff69;
-$site-title-stroke: #5effdc;
-$color-none: #0000;
-
-$nav-width: 20rem;
-$nav-padding: 2rem;
-$nav-width-mobile: 85vw;
-
 body {
   padding: 0;
   margin: 0;
@@ -54,15 +32,9 @@ $menu-nav-width: 60px;
   width: calc(($nav-width + $nav-padding) * 2);
   height: calc(($nav-width + $nav-padding) * 2);
   top: calc((($nav-width + $nav-padding) * -2) + $menu-nav-width);
-  // right: 50%;
   right: calc((($nav-width + $nav-padding) * -1));
-  // background-color: green;
   perspective: 666px;
   transition: top ($itx-timing * 2) $ease-func;
-
-  @include desktop-rules {
-    // top: calc(-100% + 165px);
-  }
 
   .nav-container {
     transform: rotateY(180deg);
@@ -74,8 +46,6 @@ $menu-nav-width: 60px;
     transform-style: preserve-3d;
     z-index: 100;
     transition: transform ($itx-timing * 2) $ease-func;
-
-    // background-color: #F006;
   }
 
   &.nav-open {
@@ -87,9 +57,6 @@ $menu-nav-width: 60px;
   }
 }
 
-
-// Create menu open and close buttons.
-// Create a hamburger style using hr tags.
 .menu-nav {
   cursor: pointer;
   width: $menu-nav-width;
@@ -107,7 +74,6 @@ $menu-nav-width: 60px;
   border-radius: 5px;
   background: linear-gradient(90deg, rgba(7, 4, 57, 1) 25%, rgba(0, 212, 255, 0.5) 100%);
 
-
   hr {
     display: block;
     width: 60%;
@@ -117,8 +83,6 @@ $menu-nav-width: 60px;
     margin: 0;
     padding: 0;
   }
-
-  &.menu-open {}
 
   &.menu-close {
     bottom: initial;
@@ -137,14 +101,11 @@ $menu-nav-width: 60px;
 }
 
 nav {
-  // transition: right $itx-timing;
   position: absolute;
   width: 50%;
   height: auto;
   z-index: 99;
-  // top: $nav-padding;
   top: calc(50vh - (($nav-width + $nav-padding) / 2));
-  // right: initial;
   left: 0;
   display: flex;
   flex-direction: column;
@@ -155,7 +116,6 @@ nav {
   padding-top: 1rem;
 
   @include desktop-rules {
-    // height: $nav-width;
     top: calc(50vh - (($nav-width + $nav-padding) / 2));
     background: linear-gradient(230deg, rgba(7, 4, 57, 1) 25%, rgba(0, 212, 255, 0.5) 80%);
   }
@@ -176,7 +136,6 @@ nav {
         stroke-dasharray $itx-timing,
         stroke-dashoffset $itx-timing,
         opacity $itx-timing;
-
       stroke-width: 5px;
       fill: none;
       stroke: $site-title-stroke;
@@ -188,8 +147,6 @@ nav {
       #5d22ff;
       opacity: 0.25;
 
-      // Check for .glow-0, .glow-1, .glow-2.
-      // Create a stagered animation delay for each.
       @for $i from 0 through 2 {
         &.glow-#{$i} {
           animation-delay: calc(0.33s * $i);
@@ -224,14 +181,12 @@ nav {
   .nav-link {
     cursor: pointer;
     font-size: 2rem;
-    // background-color: #0F05;
     padding: 0.5rem $nav-padding;
     text-align: right;
     background-color: #0000;
     border-radius: 1rem;
     transition: background-color $itx-timing;
 
-    // Loop over the number of nav links to dynamically set the width.
     @for $i from 0 through 2 {
       &.nav-link-#{$i} {
         width: percentage(math.div((90 - ($i * 10)), 100));
