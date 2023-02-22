@@ -186,6 +186,8 @@ nav {
     background-color: #0000;
     border-radius: 1rem;
     transition: background-color $itx-timing;
+    color: inherit;
+    text-decoration: none;
 
     @for $i from 0 through 2 {
       &.nav-link-#{$i} {

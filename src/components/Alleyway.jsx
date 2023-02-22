@@ -1,19 +1,11 @@
 import { useEffect, useState } from 'react'
 import '../assets/scss/Alleyway.scss'
 
-const homeCopy = () => {
-  return (
-    <>
-      Hi, I'm Sebastian.<br />I use all kinds of tools to make some pretty neat things.
-    </>
-  )
-};
-
 export default function Alleyway({ page }) {
   // Create states for the copy and links.
   const [activeSign, setActiveSign] = useState({
     key: '',
-    copy: homeCopy(),
+    copy: () => { },
     link: '',
   });
   const [transitionState, setTransitionState] = useState('transitioning');
@@ -26,7 +18,13 @@ export default function Alleyway({ page }) {
   // Define the copy and links for each page and "store sign".
   const pageInfo = {
     home: {
-      copy: homeCopy(),
+      copy: () => {
+        return (
+          <>
+            Hi, I'm Sebastian.<br />I use all kinds of tools to make some pretty neat things.
+          </>
+        )
+      },
       signs: [
         {
           position: '10',
@@ -126,7 +124,7 @@ export default function Alleyway({ page }) {
     setTransitionState('sign-transition');
 
     // If we click on the same sign, revert the copy back to the page copy.
-    if (activeSign == signKey) {
+    if (activeSign.key == signKey) {
       // Wait for the transition to finish, then set the active sign info and the transition state to ready.
       setTimeout(() => {
         setActiveSign({
@@ -169,7 +167,7 @@ export default function Alleyway({ page }) {
   return (
     <div className='background'>
       <div className={"mobile copy copy-display " + transitionState}>
-        {activeSign.copy}
+        {activeSign.copy()}
         {activeSign.link ? (
           <a className='project-link' href={activeSign.link} target="_blank">
             <svg width="24" height="24" viewBox="0 0 24 24" strokeWidth="1.5" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -183,7 +181,7 @@ export default function Alleyway({ page }) {
       <div className={"alleyway " + transitionState} data-numstores={num_stores}>
 
         <div className="copy copy-display">
-          {activeSign.copy}
+          {activeSign.copy()}
           {activeSign.link ? (
             <a className='project-link' href={activeSign.link} target="_blank">
               <svg width="24" height="24" viewBox="0 0 24 24" strokeWidth="1.5" fill="none" xmlns="http://www.w3.org/2000/svg">
