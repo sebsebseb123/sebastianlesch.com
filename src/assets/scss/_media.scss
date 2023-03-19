@@ -1,7 +1,0 @@
-$small-width: 768px;
-
-@mixin desktop-rules {
-  @media (min-width: #{$small-width}) {
-    @content;
-  }
-}
