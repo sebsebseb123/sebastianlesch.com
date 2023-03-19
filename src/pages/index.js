@@ -40,7 +40,7 @@ export default function Home() {
     <>
       <div id="home" className="section-container">
         <div className="hero">
-          <h2>Hi, I'm Sebastian Lesch 👋</h2>
+          <h2>Hi, I&apos;m Sebastian Lesch 👋</h2>
           <p>
             A full stack developer.
           </p>
