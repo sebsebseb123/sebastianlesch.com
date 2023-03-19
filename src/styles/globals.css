@@ -1,5 +1,9 @@
 :root {
   --nav-height: 50px;
+  --pre-appear: translateX(60px) rotateY(20deg) scale(0.7);
+  --appear: translateX(0px) rotateY(-10deg)scale(1);
+  --pre-appear-inv: translateX(-60px) rotateY(-20deg) scale(0.7);
+  --appear-inv: translateX(0px) rotateY(10deg)scale(1);
 }
 
 * {
@@ -101,7 +105,7 @@ main {
   align-items: center;
   justify-content: space-evenly;
   flex-direction: column;
-  background-color: #f1f1f1;
+  /* background-color: #f1f1f1; */
 }
 
 #home.section-container {
@@ -166,7 +170,7 @@ main {
 }
 
 .project-images img {
-  transform: translateX(60px) rotateY(20deg) scale(0.7);
+  transform: var(--pre-appear);
   border-radius: 10px;
   border: 2px solid #FFF;
   box-shadow: 0 0 5px #000;
@@ -182,11 +186,11 @@ main {
 }
 
 .project-images img.appear {
-  transform: translateX(0px) rotateY(-10deg)scale(1);
+  transform: var(--appear);
 }
 
 .project:nth-child(even) .project-images img {
-  transform: translateX(-60px) rotateY(-20deg) scale(0.7);
+  transform: var(--pre-appear-inv);
 }
 
 .project:nth-child(even) .project-images img.mobile {
@@ -195,15 +199,76 @@ main {
 }
 
 .project:nth-child(even) .project-images img.appear {
-  transform: translateX(0px) rotateY(10deg)scale(1);
+  transform: var(--appear-inv);
 }
 
 .contact-container {
-  padding: 2rem;
   font-size: 1.5rem;
   text-align: center;
 }
 
 .contact-container p {
   padding: 1rem;
+}
+
+footer {
+  padding: 1rem;
+  text-align: center;
+  font-size: smaller;
+}
+
+@media (max-width: 768px) {
+
+  /* Add responsive code for the nav bar */
+  nav ul {
+    display: none;
+  }
+
+  /* Add responsive code for the main element */
+  main {
+    padding: 0 2rem;
+  }
+
+  .hero {
+    font-size: 1.5rem;
+    padding-left: 1rem;
+  }
+
+  .projects-container {
+    padding: 2rem 0;
+  }
+
+  .project {
+    flex-direction: column;
+    padding: 3rem 0;
+  }
+
+  .project-images img {
+    max-width: 100%;
+  }
+
+  .project-description {
+    padding: 1rem 0;
+  }
+
+  .project:nth-child(even) {
+    flex-direction: inherit;
+  }
+
+  .project:nth-child(even) .project-images img {
+    transform: var(--pre-appear);
+  }
+
+  .project:nth-child(even) .project-images img.mobile {
+    right: auto;
+    left: 0;
+  }
+
+  .project:nth-child(even) .project-images img.appear {
+    transform: var(--appear);
+  }
+
+  .contact-container {
+    font-size: 1.25rem;
+  }
 }

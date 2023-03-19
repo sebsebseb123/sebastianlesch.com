@@ -50,15 +50,15 @@ export default function Home() {
             <br />
             <Typewriter
               words={[
-                'React.js',
                 'HTML',
-                'PHP',
-                'AWS',
                 'CSS/SASS/SCSS',
-                'SQL',
-                'REST',
-                'Google Apps Script',
                 'JavaScript',
+                'PHP',
+                'SQL',
+                'AWS',
+                'REST',
+                'React.js',
+                'Google Apps Script',
                 'Bootstrap',
                 'Drupal',
                 'Next.js',
@@ -76,7 +76,7 @@ export default function Home() {
       </div>
       <div id="projects" className="section-container">
         <div className="hero">
-          <h2>Projects</h2>
+          <h2>Projects 💻</h2>
           <p>Some things I made:</p>
         </div>
         <div className="projects-container">

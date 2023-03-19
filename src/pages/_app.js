@@ -18,6 +18,9 @@ export default function App({ Component, pageProps }) {
       <main className={headerFont.className}>
         <Component {...pageProps} />
       </main>
+      <footer className={headerFont.className}>
+        <p>© Sebastian Lesch</p>
+      </footer>
     </>
   )
 }
