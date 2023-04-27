@@ -23,7 +23,7 @@ export default function PageBlog({ blog, seo }) {
       }
       body={
         <div className="long-description markdown">
-          <Markdown children={blog.attributes.Body} />
+          <Markdown>{blog.attributes.Body}</Markdown>
         </div>
       }
     />

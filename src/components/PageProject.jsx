@@ -1,6 +1,6 @@
 import Page from '@/components/Page'
 import Image from 'next/image'
-import ReactMarkdown from 'react-markdown'
+import Markdown from '../../lib/markdown'
 
 export default function PageProject({ project, seo }) {
   return (
@@ -36,7 +36,7 @@ export default function PageProject({ project, seo }) {
             </div>
           </div>
           <div className="long-description markdown">
-            <ReactMarkdown children={project.attributes.LongDescription} />
+            <Markdown>{project.attributes.LongDescription}</Markdown>
           </div>
           <hr className='eof' />
           <div className="callout-container split">
