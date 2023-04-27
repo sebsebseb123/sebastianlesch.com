@@ -1,5 +1,4 @@
-import ProjectPage from '@/components/ProjectPage'
-import Seo from "@/components/Seo"
+import PageProject from '@/components/PageProject'
 import { fetchAPI } from "../../../lib/api"
 
 export default function Project({ project }) {
@@ -9,13 +8,10 @@ export default function Project({ project }) {
   };
 
   return (
-    <>
-      <Seo seo={seo} />
-
-      <div className="section-container">
-        <ProjectPage project={project} key={project.id} />
-      </div>
-    </>
+    <PageProject
+      project={project}
+      seo={seo}
+    />
   );
 };
 

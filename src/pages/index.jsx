@@ -1,4 +1,4 @@
-import ProjectCallout from '@/components/ProjectCallout'
+import CalloutProject from '@/components/CalloutProject'
 import Seo from '@/components/Seo'
 import { fetchAPI } from "../../lib/api";
 import { Typewriter } from 'react-simple-typewriter'
@@ -10,7 +10,7 @@ export default function Home({ projects }) {
       <Seo />
 
       <div id="home" className="section-container">
-        <div className="hero">
+        <div className="hero home">
           <h1>Hi, I&apos;m Sebastian Lesch 👋</h1>
           <p>
             A full stack developer.
@@ -50,9 +50,9 @@ export default function Home({ projects }) {
           <h2>Projects 💻</h2>
           <p>Some things I made:</p>
         </div>
-        <div className="projects-container">
+        <div className="callout-container">
           {projects.map((project) => (
-            <ProjectCallout project={project} key={project.id} />
+            <CalloutProject project={project} key={project.id} />
           ))}
         </div>
       </div>
@@ -73,6 +73,7 @@ export default function Home({ projects }) {
 export async function getStaticProps() {
   const projectsRes = await fetchAPI("/projects", {
     populate: "*",
+    sort: "rank:asc",
   });
 
   return {

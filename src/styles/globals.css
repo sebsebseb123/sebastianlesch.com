@@ -1,9 +1,24 @@
 :root {
+  --primary-color: #1A5276;
+  --secondary-color: #D35400;
+  --accent-color: #27AE60;
+
+  --primary-bg-color: #F2F3F4;
+  --secondary-bg-color: #FCFDFE;
+
+  --primary-text-color: #1A5276;
+  --secondary-text-color: #D35400;
+  --accent-text-color: #27AE60;
+
+  --border-primary-color: #999;
+
   --nav-height: 50px;
-  --pre-appear: translateX(60px) rotateY(20deg) scale(0.7);
-  --appear: translateX(0px) rotateY(-10deg)scale(1);
-  --pre-appear-inv: translateX(-60px) rotateY(-20deg) scale(0.7);
-  --appear-inv: translateX(0px) rotateY(10deg)scale(1);
+  --max-width: 960px;
+
+  --pre-appear-inv: translateX(60px) rotateY(20deg) scale(0.7);
+  --appear-inv: translateX(0px) rotateY(-10deg)scale(1);
+  --pre-appear: translateX(-60px) rotateY(-20deg) scale(0.7);
+  --appear: translateX(0px) rotateY(10deg)scale(1);
 }
 
 * {
@@ -14,6 +29,8 @@
 
 body {
   padding: var(--nav-height) 0 0;
+  background-color: var(--primary-bg-color);
+  color: var(--primary-text-color);
 }
 
 a {
@@ -34,6 +51,27 @@ h1 {
   font-style: italic;
 }
 
+.strong {
+  font-weight: 700;
+}
+
+code {
+  background-color: #282a36;
+  color: #f8f8f2;
+  padding: 0.2rem 0.4rem;
+  margin: 0 0.1rem;
+  border-radius: 2px;
+}
+
+pre {
+  overflow-x: auto;
+}
+
+hr.eof {
+  border-style: double;
+  border-width: unset;
+}
+
 nav {
   position: fixed;
   top: 0;
@@ -42,7 +80,7 @@ nav {
   height: var(--nav-height);
   backdrop-filter: blur(10px);
   z-index: 100;
-  border-bottom: 1px solid #999;
+  border-bottom: 1px solid var(--border-primary-color);
   display: flex;
   align-items: center;
   padding: 0 2rem;
@@ -58,6 +96,10 @@ nav .nav-title {
   font-size: 1.25rem;
 }
 
+nav .nav-title a {
+  text-decoration: none;
+}
+
 nav ul {
   display: flex;
   height: 100%;
@@ -67,13 +109,19 @@ nav ul {
   gap: 2rem;
 }
 
+nav .nav-title,
+nav ul li {
+  text-shadow: 0 0 10px #FFF;
+}
+
 main {
-  max-width: 960px;
+  max-width: var(--max-width);
   margin: 0 auto;
+  padding-top: var(--nav-height);
 }
 
 .section-container {
-  padding: 2rem 0;
+  /* padding: 2rem 0; */
   min-height: calc(100vh - var(--nav-height));
   scroll-margin-top: var(--nav-height);
   display: flex;
@@ -83,9 +131,21 @@ main {
   /* background-color: #f1f1f1; */
 }
 
+.section-container.blog-page>div {
+  max-width: 100%;
+}
+
+.section-container.blog-page .callout-container {
+  padding: 0;
+}
+
+.section-container.blog-page .callout-container .callout {
+  padding: 0;
+}
+
 .hero {
   font-size: 2.5rem;
-  border-left: 1px double #999;
+  border-left: 1px double var(--border-primary-color);
   padding-left: 2rem;
 }
 
@@ -97,24 +157,68 @@ main {
   font-size: smaller;
 }
 
-.projects-container {
+.card-container,
+.callout-container {
   display: flex;
   flex-direction: column;
   gap: 2rem;
   padding: 2rem;
 }
 
-.project {
+.card-container {
+  flex-direction: row;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  /* padding: 0.5rem; */
+  /* border: 1px solid var(--border-primary-color); */
+  /* border-radius: 10px; */
+  box-shadow: 1px 1px 4px var(--border-primary-color);
+  max-width: 300px;
+  transition: all 0.2s ease-in-out;
+}
+
+.card:hover {
+  box-shadow: 2px 2px 6px var(--border-primary-color);
+}
+
+.card img {
+  /* border: 1px solid var(--border-primary-color); */
+  /* border-radius: 10px; */
+}
+
+.card .card-description {
+  padding: 1rem;
+}
+
+.card .card-description p {
+  margin: 1rem auto;
+}
+
+.card a {
+  text-decoration: none;
+}
+
+.card time {
+  width: 100%;
+  display: inline-block;
+  text-align: right;
+}
+
+.callout {
   display: flex;
   flex-direction: row;
   padding: 2rem 0;
+  justify-content: center
 }
 
-.project:nth-child(even) {
+.callout:nth-child(even) {
   flex-direction: row-reverse;
 }
 
-.project-description {
+.callout .callout-description {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -122,17 +226,17 @@ main {
   padding: 2rem;
 }
 
-.project-description p.description {
-  border-left: 1px solid #999;
+.callout .callout-description p.description {
+  border-left: 1px solid var(--border-primary-color);
   padding: 0 1rem;
 }
 
-.project-images {
+.callout .callout-images {
   perspective: 600px;
   padding: 1rem;
 }
 
-.project-images img {
+.callout.project .callout-images img {
   transform: var(--pre-appear);
   border-radius: 10px;
   border: 2px solid #FFF;
@@ -142,27 +246,68 @@ main {
   transition: all 2s ease-in-out;
 }
 
-.project-images img.mobile {
+.callout.project .callout-images img.mobile {
   position: absolute;
   bottom: 0;
   left: 0;
 }
 
-.project-images img.appear {
+.callout.project.appear .callout-images img {
   transform: var(--appear);
 }
 
-.project:nth-child(even) .project-images img {
+.callout.project:nth-child(even) .callout-images img {
   transform: var(--pre-appear-inv);
 }
 
-.project:nth-child(even) .project-images img.mobile {
+.callout.project:nth-child(even) .callout-images img.mobile {
   right: 0;
   left: auto;
 }
 
-.project:nth-child(even) .project-images img.appear {
+.callout.project.appear:nth-child(even) .callout-images img {
   transform: var(--appear-inv);
+}
+
+.callout.split {
+  flex-direction: row;
+}
+
+.callout.split>div {
+  flex-grow: 1;
+  max-width: 50%;
+  padding: 2rem;
+}
+
+.callout.split>div:nth-child(2) {
+  border-left: 1px solid var(--border-primary-color);
+}
+
+.markdown {
+  padding: 2rem;
+}
+
+.markdown p,
+.markdown h1,
+.markdown h2,
+.markdown h3,
+.markdown h4,
+.markdown h5,
+.markdown h6 {
+  padding: 1rem 0;
+}
+
+.markdown p {
+  line-height: 1.3rem;
+}
+
+.markdown ol,
+.markdown ul {
+  padding: 0 3rem;
+}
+
+.markdown li {
+  margin: 0.5rem 0;
 }
 
 .contact-container {
@@ -180,7 +325,28 @@ footer {
   font-size: smaller;
 }
 
+/******************************************
+* Media Queries
+******************************************/
 @media (max-width: 768px) {
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  /* Add responsive code for the main element */
+  main {
+    padding: calc(var(--nav-height) * 2) 2rem 0;
+  }
+
+  .markdown {
+    padding: 0;
+  }
+
+  .markdown ul,
+  .markdown ol {
+    padding: 0 1.5rem;
+  }
 
   /* Add responsive code for the nav bar */
   nav {
@@ -234,13 +400,13 @@ footer {
 
   nav ul li {
     background-color: #9993;
-    border-bottom: 1px solid #9999;
+    border-bottom: 1px solid var(--border-primary-color);
     display: block;
     height: 3rem;
   }
 
   nav ul li:first-child {
-    border-top: 1px solid #9999;
+    border-top: 1px solid var(--border-primary-color);
   }
 
   nav ul li a {
@@ -250,48 +416,73 @@ footer {
     font-weight: 500;
   }
 
-  /* Add responsive code for the main element */
-  main {
-    padding: 0 2rem;
-  }
 
   .hero {
     font-size: 1.5rem;
     padding-left: 1rem;
   }
 
-  .projects-container {
+  .callout-container {
     padding: 2rem 0;
   }
 
-  .project {
+  .callout-container .callout {
     flex-direction: column;
     padding: 3rem 0;
   }
 
-  .project-images img {
-    max-width: 100%;
-  }
-
-  .project-description {
+  .callout-container .callout .callout-description {
     padding: 1rem 0;
   }
 
-  .project:nth-child(even) {
-    flex-direction: inherit;
-  }
-
-  .project:nth-child(even) .project-images img {
+  .callout-container .callout.project .callout-images img {
+    max-width: 100%;
     transform: var(--pre-appear);
   }
 
-  .project:nth-child(even) .project-images img.mobile {
-    right: auto;
+  .callout-container .callout.project .callout-images img.mobile {
+    bottom: 0;
     left: 0;
   }
 
-  .project:nth-child(even) .project-images img.appear {
+  .callout-container .callout.project.appear .callout-images img {
     transform: var(--appear);
+  }
+
+  .callout-container.split {
+    padding: 0;
+  }
+
+  .callout-container .callout.split {
+    flex-direction: column;
+    padding: 0;
+  }
+
+  .callout-container .callout.split>div {
+    max-width: 100%;
+    padding: 1rem;
+  }
+
+  .callout-container .callout.split>div:nth-child(2) {
+    border-left: none;
+    border-top: 1px solid var(--border-primary-color);
+  }
+
+  .card-container {
+    flex-direction: column;
+  }
+
+  .blogs-page .page-body {
+    padding: 4rem 0;
+  }
+
+  .blog.callout .callout-images img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .blog-page.section-container {
+    margin-top: -5rem;
   }
 
   .contact-container {
