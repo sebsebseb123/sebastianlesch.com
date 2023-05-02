@@ -33,6 +33,17 @@ body {
   color: var(--primary-text-color);
 }
 
+#home.section-container {
+  margin-top: -5rem;
+  margin-bottom: 5rem;
+}
+
+main {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  /* padding-top: var(--nav-height); */
+}
+
 a {
   color: inherit;
 }
@@ -114,12 +125,6 @@ nav ul li {
   text-shadow: 0 0 10px #FFF;
 }
 
-main {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding-top: var(--nav-height);
-}
-
 .section-container {
   /* padding: 2rem 0; */
   min-height: calc(100vh - var(--nav-height));
@@ -167,16 +172,17 @@ main {
 
 .card-container {
   flex-direction: row;
+  padding: 2rem 0;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
 }
 
 .card {
   display: flex;
   flex-direction: column;
-  /* padding: 0.5rem; */
-  /* border: 1px solid var(--border-primary-color); */
-  /* border-radius: 10px; */
   box-shadow: 1px 1px 4px var(--border-primary-color);
-  max-width: 300px;
+  max-width: 30%;
   transition: all 0.2s ease-in-out;
 }
 
@@ -185,8 +191,7 @@ main {
 }
 
 .card img {
-  /* border: 1px solid var(--border-primary-color); */
-  /* border-radius: 10px; */
+  max-width: 100%;
 }
 
 .card .card-description {
@@ -205,6 +210,16 @@ main {
   width: 100%;
   display: inline-block;
   text-align: right;
+}
+
+.callout.blog {
+  flex-direction: column;
+}
+
+.callout .callout-description.blog-title {
+  font-size: 1.25rem;
+  padding: 0.5rem 2rem 0;
+  text-align: center;
 }
 
 .callout {
@@ -336,7 +351,7 @@ footer {
 
   /* Add responsive code for the main element */
   main {
-    padding: calc(var(--nav-height) * 2) 2rem 0;
+    padding: 0 2rem 0;
   }
 
   .markdown {
