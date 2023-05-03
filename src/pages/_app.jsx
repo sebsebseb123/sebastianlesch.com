@@ -1,6 +1,7 @@
 import App from "next/app"
 import { Asap } from 'next/font/google'
 import Head from 'next/head'
+import Script from 'next/script'
 import { createContext } from "react";
 import { fetchAPI } from "../../lib/api";
 import { getStrapiMedia } from "../../lib/media";
@@ -23,6 +24,19 @@ export default function MainApp({ Component, pageProps }) {
           href={getStrapiMedia(global.attributes.favicon)}
         />
       </Head>
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=G-R1KLXX2C3F"
+        strategy="afterInteractive"
+      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){window.dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-R1KLXX2C3F');
+        `}
+      </Script>
       <Nav className={headerFont.className} />
       <main className={headerFont.className}>
         <GlobalContext.Provider value={global.attributes}>

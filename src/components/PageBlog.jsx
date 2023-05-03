@@ -4,7 +4,6 @@ import Image from 'next/image'
 import Markdown from '../../lib/markdown'
 
 export default function PageBlog({ blog, seo }) {
-  console.log(blog);
   return (
     <Page
       seo={seo}
