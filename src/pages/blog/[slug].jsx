@@ -2,9 +2,11 @@ import PageBlog from '@/components/PageBlog'
 import { fetchAPI } from "../../../lib/api"
 
 export default function Blog({ blog }) {
+  console.log(blog);
   const seo = {
     metaTitle: `${blog.attributes.Title} // ${blog.attributes.Type}`,
     metaDescription: blog.attributes.Description,
+    shareImage: blog.attributes.Seo.shareImage,
   };
 
   return (
