@@ -487,6 +487,10 @@ footer {
     flex-direction: column;
   }
 
+  .card {
+    max-width: none;
+  }
+
   .blogs-page .page-body {
     padding: 4rem 0;
   }
@@ -494,10 +498,6 @@ footer {
   .blog.callout .callout-images img {
     max-width: 100%;
     height: auto;
-  }
-
-  .blog-page.section-container {
-    margin-top: -5rem;
   }
 
   .contact-container {
